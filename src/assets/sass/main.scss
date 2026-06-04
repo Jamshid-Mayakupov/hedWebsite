@@ -1,0 +1,121 @@
+*{
+    box-sizing: border-box;
+}
+.ourteam__card img{
+    width: 200px;
+}
+.container{
+    max-width: 1250px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+}.ourteam{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 30px;
+    &__card{
+        padding: 20px;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        &-title{
+            font-size: 20px;
+        }
+    }
+    &__title{
+        font-size: 50px;
+        text-align: center;
+    }
+}
+.ourteam {
+  width: 100%;
+  overflow: hidden; // Slaydlar ekrandan chiqib ketmasligi uchun
+  position: relative;
+  padding: 20px 0;
+
+  &__title {
+    font-size: 40px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    // qolgan stillaringiz...
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    justify-content: flex-start;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); // Chiroyli soya
+    box-sizing: border-box;
+        transition: 1s;
+
+        height: 550px;
+
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    &-title {
+      font-size: 20px;
+      margin-top: 15px;
+      font-weight: 600;
+    }
+
+    &-text {
+      font-size: 17px;
+      color: #666;
+      margin-top: 5px;
+    }
+  }
+}
+
+.swiper-button-next, .swiper-button-prev {
+  color: #000; 
+}
+.swiper-pagination-bullet-active {
+  background: #000; 
+}
+.ourteam__card:hover{
+        width: 320px;
+        transition: 1s;
+        gap: 0;
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ourteam__card {
+  transition: all 0.8s ease;
+}
+
+.ourteam__card:hover {
+  transform: translateY(-10px) scale(1.05);
+}
+.ourteam__card:nth-child(1) { transition-delay: 0.1s; }
+.ourteam__card:nth-child(2) { transition-delay: 0.2s; }
+.ourteam__card:nth-child(3) { transition-delay: 0.3s; }
+.ourteam__card:nth-child(4) { transition-delay: 0.4s; }
+.ourteam__card:nth-child(5) { transition-delay: 0.5s; }
+.ourteam__card:nth-child(6) { transition-delay: 0.6s; }
+.ourteam__card:nth-child(7) { transition-delay: 0.7s; }
+.ourteam__card:nth-child(8) { transition-delay: 0.8s; }
+.ourteam__card:nth-child(9) { transition-delay: 0.9s; }
+.ourteam__card:nth-child(10) { transition-delay: 1s; }

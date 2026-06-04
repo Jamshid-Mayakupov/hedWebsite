@@ -1,0 +1,84 @@
+/* src/index.css */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --black: #311F09;
+  --dark-blue: #00245C;
+  --ocean: #1c4c5c;
+  --gray-brown: #907c74;
+  --red-orange: #f86e50;
+}
+
+/* Базовые стили */
+@layer base {
+  * {
+    @apply antialiased;
+  }
+
+  body {
+    @apply font-poppins text-gray-900 bg-gray-50;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Raleway', sans-serif;
+    @apply font-bold;
+  }
+}
+
+/* Утилиты */
+@layer utilities {
+  .section-container {
+    @apply max-w-7xl xl:max-w-[1200px] 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-spacing {
+    @apply py-16 md:py-20 lg:py-24;
+  }
+
+  .section-spacing-sm {
+    @apply py-12 md:py-16 lg:py-20;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-xl;
+  }
+
+  .btn-primary {
+    @apply bg-Blue hover:bg-darkBlue text-white font-semibold px-8 py-3.5 rounded transition-all duration-300 shadow-md hover:shadow-lg;
+  }
+
+  .btn-outline {
+    @apply border-2 border-Blue text-Blue hover:bg-Blue hover:text-white font-semibold px-8 py-3.5 rounded transition-all duration-300;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-Blue to-lightBlue bg-clip-text text-transparent;
+  }
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Кастомный скроллбар */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-Blue rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-darkBlue;
+}
