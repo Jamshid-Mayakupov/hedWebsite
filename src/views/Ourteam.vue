@@ -43,7 +43,7 @@
             </div>
             <div class="ourteam__card reveal">
                 <img src="../assets/images/ourteamimages/IMG_8.JPG" alt="">
-                <h2 class="ourteam__card-title">Полина</h2>
+                <h2 class="ourteam__card-title">Полина Коршунова</h2>
                 <p class="ourteam__card-text">Главный бухгалтер</p>
             </div>
             <div class="ourteam__card reveal">
@@ -54,22 +54,22 @@
             </div>
             <div class="ourteam__card reveal">
                 <img src="../assets/images/ourteamimages/IMG_10.JPG" alt="">
-                <h2 class="ourteam__card-title">Жамшид</h2>
+                <h2 class="ourteam__card-title">Жамшид Барнаев</h2>
                 <p class="ourteam__card-text">Руководитель проекта Neotron</p>
             </div>
             <div class="ourteam__card reveal">
                 <img src="../assets/images/ourteamimages/IMG_11.JPG" alt="">
-                <h2 class="ourteam__card-title">Сардор</h2>
+                <h2 class="ourteam__card-title">Сардор Кузибеков</h2>
                 <p class="ourteam__card-text">уководитель проекта AORTICA</p>
             </div>
             <div class="ourteam__card reveal">
                 <img src="../assets/images/ourteamimages/IMG_12.JPG" alt="">
-                <h2 class="ourteam__card-title">Азиз</h2>
+                <h2 class="ourteam__card-title">Азизжон Раимджонов</h2>
                 <p class="ourteam__card-text">Заведующий складом</p>
             </div>
             <div class="ourteam__card reveal">
                 <img src="../assets/images/ourteamimages/IMG_13.JPG" alt="">
-                <h2 class="ourteam__card-title">Достон</h2>
+                <h2 class="ourteam__card-title">Достон Нарзуллаев</h2>
                 <p class="ourteam__card-text">Работник склада</p>
             </div>
         </div>
