@@ -4,7 +4,7 @@ import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/hedWebsite/', // <-- hedWebsite deb o'zgartirildi
+  base: '/hedWebsite/',
   plugins: [vue()],
   resolve: {
     alias: {
