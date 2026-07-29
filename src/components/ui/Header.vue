@@ -110,6 +110,7 @@ const links = [
   { text: "О нас", link: "/about" },
   { text: "Продукция", link: "/products" },
   { text: "Новости", link: "/news" },
+  { text: 'Направление', link:'/direction' },
   { text: "Контакты", link: "/contacts" },
  { text: "Наша команда", link: "/ourteam" },
   { isComponent: true }

@@ -31,6 +31,7 @@ const links = [
 	{ text: 'Комплаенс', link: '/complains' },
 	{ text: 'Продукция', link: '/products' },
 	{ text: 'Новости', link: '/news' },
+	{ text: 'Направление', link:'/direction' },
 	{ text: 'Контакты', link: '/contacts' },
 	{ text: 'Наша команда', link: '/ourteam' },
 ]

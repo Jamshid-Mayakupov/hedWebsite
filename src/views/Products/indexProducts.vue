@@ -3,27 +3,63 @@
   <section class="bg-gray-50">
     <!-- Hero Section -->
     <div class="section-container py-16 md:py-20">
-      <div class="text-center mb-12" data-aos="fade-up" data-aos-duration="800">
-        <p
-          class="text-Blue font-semibold text-sm uppercase tracking-wider mb-3"
-        >
+      <div class="text-center mb-8" data-aos="fade-up" data-aos-duration="800">
+        <p class="text-Blue font-semibold text-sm uppercase tracking-wider mb-3">
           Наша продукция
         </p>
-        <h1
-          class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 font-raleway"
-        >
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 font-raleway">
           Каталог продуктов
         </h1>
         <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          Высококачественные фармацевтические препараты от ведущих мировых
-          производителей
+          Высококачественные фармацевтические препараты от ведущих мировых производителей
         </p>
       </div>
 
-      <!-- Products Grid -->
-      <div
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8"
+      <!-- BRAND BUTTONS SECTION (Matnlardan keyin, Products Grid'dan oldin) -->
+      <div 
+        class="flex flex-wrap items-center justify-center gap-4 mb-12"
+        data-aos="fade-up" 
+        data-aos-duration="800"
       >
+        <!-- Albadent Tugmasi -->
+        <button
+          type="button"
+          @click="openExternalProduct('https://albadent.uz/products')"
+          class="inline-flex items-center gap-3 px-6 py-3 bg-white border border-gray-200 text-gray-800 font-semibold rounded-xl shadow-sm hover:bg-[#13227a] hover:border-[#13227a] hover:text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md group cursor-pointer"
+        >
+          <img :src="albadentImg" alt="Albadent" class="w-6 h-6 object-cover rounded" />
+          <span>Albadent</span>
+          <svg 
+            class="w-4 h-4 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </button>
+
+        <!-- Daantec Tugmasi -->
+        <button
+          type="button"
+          @click="openExternalProduct('https://daantec.uz/catalog')"
+          class="inline-flex items-center gap-3 px-6 py-3 bg-white border border-gray-200 text-gray-800 font-semibold rounded-xl shadow-sm hover:bg-[#13227a] hover:border-[#13227a] hover:text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md group cursor-pointer"
+        >
+          <img :src="daantecImg" alt="Daantec" class="w-6 h-6 object-cover rounded" />
+          <span>Daantec</span>
+          <svg 
+            class="w-4 h-4 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 0 0-2 2v10a2 2 0 0 02 2h10a2 2 0 0 02-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8">
         <article
           v-for="(product, index) in products"
           :key="product.slug"
@@ -43,15 +79,11 @@
 
           <!-- Product Info -->
           <div class="p-6 flex flex-col flex-grow">
-            <p
-              class="text-Blue text-sm font-semibold mb-2 uppercase tracking-wide"
-            >
+            <p class="text-Blue text-sm font-semibold mb-2 uppercase tracking-wide">
               {{ product.manufacturer }}
             </p>
 
-            <h3
-              class="text-lg font-semibold text-gray-900 mb-3 line-clamp-2 leading-tight font-raleway"
-            >
+            <h3 class="text-lg font-semibold text-gray-900 mb-3 line-clamp-2 leading-tight font-raleway">
               {{ product.name }}
             </h3>
 
@@ -75,9 +107,7 @@
     <div class="bg-white py-16 md:py-20">
       <div class="section-container">
         <div class="max-w-4xl mx-auto text-center">
-          <h2
-            class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 font-raleway"
-          >
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 font-raleway">
             Качество и надежность
           </h2>
           <p class="text-gray-700 text-lg leading-relaxed mb-8">
@@ -87,42 +117,18 @@
           </p>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <div class="text-center">
-              <div
-                class="w-16 h-16 bg-Blue/10 rounded-xl flex items-center justify-center mx-auto mb-4"
-              >
-                <svg
-                  class="w-8 h-8 text-Blue"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
+              <div class="w-16 h-16 bg-Blue/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-Blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
               <h3 class="font-semibold text-gray-900 mb-2">Сертификация</h3>
               <p class="text-sm text-gray-600">Все продукты сертифицированы</p>
             </div>
             <div class="text-center">
-              <div
-                class="w-16 h-16 bg-Blue/10 rounded-xl flex items-center justify-center mx-auto mb-4"
-              >
-                <svg
-                  class="w-8 h-8 text-Blue"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
+              <div class="w-16 h-16 bg-Blue/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-Blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
               <h3 class="font-semibold text-gray-900 mb-2">Быстрая доставка</h3>
@@ -131,21 +137,9 @@
               </p>
             </div>
             <div class="text-center">
-              <div
-                class="w-16 h-16 bg-Blue/10 rounded-xl flex items-center justify-center mx-auto mb-4"
-              >
-                <svg
-                  class="w-8 h-8 text-Blue"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"
-                  />
+              <div class="w-16 h-16 bg-Blue/10 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-Blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
               </div>
               <h3 class="font-semibold text-gray-900 mb-2">Поддержка 24/7</h3>
@@ -164,9 +158,7 @@
         data-aos-duration="800"
       >
         <div class="relative z-10">
-          <h2
-            class="text-3xl md:text-4xl font-bold text-white mb-4 font-raleway"
-          >
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 font-raleway">
             Не нашли нужный препарат?
           </h2>
           <p class="text-white/90 text-lg mb-8 max-w-2xl mx-auto">
@@ -179,12 +171,8 @@
             Связаться с нами
           </router-link>
         </div>
-        <div
-          class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"
-        ></div>
-        <div
-          class="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full -ml-24 -mb-24"
-        ></div>
+        <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
+        <div class="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full -ml-24 -mb-24"></div>
       </div>
     </div>
   </section>
@@ -194,7 +182,11 @@
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
-// Импорты изображений
+// Tugmalar rasmlari
+import albadentImg from "@/assets/images/direction/image.png";
+import daantecImg from "@/assets/images/direction/image copy.png";
+
+// Mahsulotlar rasmlari
 import antagrixImg from "@/assets/product-card/antagrix.png";
 import dcefImg from "@/assets/product-card/d-cef.png";
 import infuziolImg from "@/assets/product-card/infuziol.png";
@@ -202,6 +194,11 @@ import letokarImg from "@/assets/product-card/letokar.png";
 import lifeonImg from "@/assets/product-card/life-on.png";
 
 const router = useRouter();
+
+// Tashqi mahsulotlar sahifasini ochuvchi funksiya
+const openExternalProduct = (url) => {
+  window.open(url, "_blank");
+};
 
 // Статичные данные продуктов
 const products = ref([
@@ -262,21 +259,18 @@ const products = ref([
 .font-raleway {
   font-family: "Raleway", sans-serif;
 }
-
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-
-.line-clamp-3 {
+.line-clamp-4 {
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-
 .aspect-square {
   aspect-ratio: 1 / 1;
 }

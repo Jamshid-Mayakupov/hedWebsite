@@ -256,13 +256,11 @@ const performSearch = () => {
     searchQuery.value = ''
   }
 }
-
 const startTyping = () => {
   typedText.value = ''
   typingIndex = 0
   typeChar()
 }
-
 const typeChar = () => {
   if (typingIndex < fullText.length) {
     typedText.value += fullText[typingIndex]
@@ -270,7 +268,6 @@ const typeChar = () => {
     setTimeout(typeChar, 150) // Скорость печати 150ms
   }
 }
-
 onMounted(() => {
   setTimeout(() => {
     startTyping()
@@ -283,6 +280,7 @@ const links = [
   { text: 'Комплаенс', link: '/complains' },
   { text: 'Продукция', link: '/products' },
   { text: 'Новости', link: '/news' },
+  { text: 'Направление', link:'/direction' },
   { text: 'Контакты', link: '/contacts' },
   { text: 'Наша команда', link: '/ourteam' },
 ]
