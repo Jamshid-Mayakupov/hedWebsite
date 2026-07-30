@@ -7,7 +7,7 @@
       <div class="tabs-wrapper">
         <!-- 1. Albadent (Tashqi link) -->
         <a 
-          href="https://albadent.uz" 
+          href="https://jamshid-mayakupov.github.io/albaWebsite/" 
           target="_blank" 
           class="tab-btn tab-btn--external"
         >
@@ -22,7 +22,7 @@
 
         <!-- 2. Daantec (Tashqi link) -->
         <a 
-          href="https://daantec.uz" 
+          href="https://jamshid-mayakupov.github.io/daantecWebSite/" 
           target="_blank" 
           class="tab-btn tab-btn--external"
         >
@@ -34,6 +34,38 @@
             <line x1="10" y1="14" x2="21" y2="3"></line>
           </svg>
         </a>
+      
+
+
+                <a 
+          href="https://jamshid-mayakupov.github.io/turonWebSite/" 
+          target="_blank" 
+          class="tab-btn tab-btn--external"
+        >
+          <img :src="img6" alt="Daantec" class="tab-img" />
+          <span>Turon analystic</span>
+          <svg class="external-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </a>
+                <a 
+          href="https://jamshid-mayakupov.github.io/uritWebSite/" 
+          target="_blank" 
+          class="tab-btn tab-btn--external"
+        >
+          <img :src="img7" alt="Daantec" class="tab-img" />
+          <span>Urit site</span>
+          <svg class="external-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </a>
+
+
+
 
         <!-- 3. Aortika (Ichki tab) -->
         <button 
@@ -169,6 +201,8 @@ import img2 from '@/assets/images/direction/image copy.png'
 import img3 from '@/assets/images/direction/image copy 2.png'
 import img4 from '@/assets/images/direction/image copy 3.png'
 import img5 from '@/assets/images/direction/image copy 4.png'
+import img6 from '@/assets/images/direction/image copy 5.png'
+import img7 from '@/assets/images/direction/image copy 6.png'
 
 const activeTab = ref('aortika')
 </script>
