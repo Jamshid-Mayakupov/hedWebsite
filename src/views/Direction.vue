@@ -63,11 +63,6 @@
             <line x1="10" y1="14" x2="21" y2="3"></line>
           </svg>
         </a>
-
-
-
-
-        <!-- 3. Aortika (Ichki tab) -->
         <button 
           class="tab-btn" 
           :class="{ 'is-active': activeTab === 'aortika' }"
@@ -77,7 +72,6 @@
           <span>Aortika</span>
         </button>
 
-        <!-- 4. Head Marketing (Ichki tab) -->
         <button 
           class="tab-btn" 
           :class="{ 'is-active': activeTab === 'marketing' }"
