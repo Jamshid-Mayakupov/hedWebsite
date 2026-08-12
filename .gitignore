@@ -17,6 +17,10 @@ yarn-error.log*
 
 # Build output
 dist/
+.vite/
+coverage/
+playwright-report/
+test-results/
 
 # IDE & Editor files
 .idea/
