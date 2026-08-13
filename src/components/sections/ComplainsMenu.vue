@@ -1,56 +1,60 @@
 <template>
-	<div class="relative group">
-		<button class="flex items-center space-x-2 transition-transform hover:text-Blue duration-300 ease-in-out">
-			<a href="/complains" class=" ">Комплаенс</a>
-			<img :src="arrowDown" alt="Раскрывающееся меню"
-				class="w-5 h-5 transition-transform duration-300 group-hover:rotate-180" />
-		</button>
+  <div ref="menuRoot" class="relative group" @keydown.esc="closeMenu">
+    <div class="flex items-center">
+      <router-link
+        to="/complains"
+        class="font-medium transition-colors duration-300"
+        :class="linkClasses"
+        @click="closeMenu">
+        Комплаенс
+      </router-link>
+      <button
+        type="button"
+        class="grid min-h-11 min-w-11 place-items-center rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lightBlue"
+        :class="buttonClasses"
+        aria-label="Открыть меню комплаенса"
+        aria-controls="compliance-menu"
+        :aria-expanded="isOpen"
+        @click="isOpen = !isOpen">
+        <img
+          :src="arrowDown"
+          alt=""
+          class="h-4 w-4 transition-transform duration-200"
+          :class="[{ 'rotate-180': isOpen }, tone === 'light' ? 'brightness-0 invert' : '']" />
+      </button>
+    </div>
 
-		<div
-			class="absolute right-0 mt-1 w-64 bg-gray-100 shadow-lg scale-95 translate-y-1 invisible group-hover:opacity-100 group-hover:scale-100 group-hover:translate-y-0 group-hover:visible transition-all duration-300 ease-in-out">
-			<ul class="py-0">
-				<li class="relative group/documents">
-					<button
-						class="w-full text-left px-4 py-1.5 bg-white text-black hover:bg-Blue hover:text-white transition-colors duration-300 ease-in-out flex justify-between items-center">
-						<span>Ведомственные документы</span>
-						<img :src="arrowDown" alt="Раскрывающееся подменю"
-							class="w-5 h-5 transition-transform duration-300 group-hover/documents:rotate-180" />
-					</button>
-
-					<div
-						class="absolute left-52 top-2 ml-2 w-48 bg-white shadow-lg opacity-0 scale-95 translate-y-1 invisible group-hover/documents:opacity-100 group-hover/documents:scale-100 group-hover/documents:translate-y-0 group-hover/documents:visible transition-all duration-300 ease-in-out">
-						<ul class="py-0">
-							<li v-for="item in documentLinks" :key="item.text">
-								<a :href="item.file" target="_blank" rel="noopener noreferrer"
-									class="block px-4 py-1.5 hover:bg-Blue hover:text-white transition-colors duration-300 ease-in-out"
-									:aria-label="item.text">
-									{{ item.text }}
-								</a>
-							</li>
-						</ul>
-					</div>
-				</li>
-
-				<li>
-					<router-link :to="appealPage"
-						class="block px-4 py-1.5 hover:bg-Blue hover:text-white transition-colors duration-300 ease-in-out"
-						aria-label="Перейти к обращению">
-						Обращение
-					</router-link>
-				</li>
-				<li>
-					<router-link :to="privacyPolicyPage"
-						class="block px-4 py-1.5 hover:bg-Blue hover:text-white transition-colors duration-300 ease-in-out"
-						aria-label="Перейти к политике конфиденциальности">
-						Политика конфиденциальности
-					</router-link>
-				</li>
-			</ul>
-		</div>
-	</div>
+    <div
+      id="compliance-menu"
+      class="absolute right-0 top-full z-50 w-72 origin-top-right rounded-lg border border-gray-100 bg-white py-2 text-gray-800 shadow-xl transition duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100"
+      :class="isOpen ? 'visible translate-y-0 opacity-100' : 'invisible translate-y-1 opacity-0'">
+      <router-link to="/complains" class="menu-link font-semibold" @click="closeMenu">
+        Раздел комплаенса
+      </router-link>
+      <p class="px-4 pb-1 pt-3 text-xs font-semibold uppercase tracking-wide text-gray-500">
+        Документы
+      </p>
+      <a
+        v-for="item in documentLinks"
+        :key="item.text"
+        :href="item.file"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="menu-link"
+        @click="closeMenu">
+        {{ item.text }}
+      </a>
+      <div class="my-2 border-t border-gray-100"></div>
+      <router-link to="/appeal" class="menu-link" @click="closeMenu">Обращение</router-link>
+      <router-link to="/privacy-policy" class="menu-link" @click="closeMenu">
+        Политика конфиденциальности
+      </router-link>
+    </div>
+  </div>
 </template>
 
 <script setup>
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import arrowDown from "@/assets/images/icons/chevron-down.svg"
 
 import hedCodeOfConduct from "@/assets/images/complains/hed_code_of_conduct.pdf"
@@ -63,6 +67,37 @@ const documentLinks = [
 	{ text: "HED Code of Conduct", file: hedCodeOfConduct }
 ]
 
-const appealPage = "/appeal"
-const privacyPolicyPage = "/privacy-policy"
+const props = defineProps({
+  tone: {
+    type: String,
+    default: 'dark',
+    validator: (value) => ['dark', 'light'].includes(value),
+  },
+})
+
+const isOpen = ref(false)
+const menuRoot = ref(null)
+const linkClasses = computed(() => props.tone === 'light'
+  ? 'text-white hover:text-lightBlue'
+  : 'text-gray-700 hover:text-Blue')
+const buttonClasses = computed(() => props.tone === 'light'
+  ? 'text-white hover:bg-white/10'
+  : 'text-gray-700 hover:bg-gray-100')
+
+const closeMenu = () => {
+  isOpen.value = false
+}
+
+const handleOutsideClick = (event) => {
+  if (!menuRoot.value?.contains(event.target)) closeMenu()
+}
+
+onMounted(() => document.addEventListener('pointerdown', handleOutsideClick))
+onBeforeUnmount(() => document.removeEventListener('pointerdown', handleOutsideClick))
 </script>
+
+<style scoped>
+.menu-link {
+  @apply block min-h-11 px-4 py-3 text-sm transition-colors hover:bg-Blue hover:text-white focus-visible:bg-Blue focus-visible:text-white focus-visible:outline-none;
+}
+</style>

@@ -5,19 +5,22 @@
   src: url('/src/assets/fonts/Poppins-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Poppins';
-  src: url('/src/assets/fonts/Poppins-Bold.woff2') format('woff2');
+  src: url('/src/assets/fonts/Poppins-SemiBold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Poppins';
   src: url('/src/assets/fonts/Poppins-Thin.woff2') format('woff2');
   font-weight: 100;
   font-style: normal;
+  font-display: swap;
 }
 
 
@@ -25,7 +28,7 @@
   font-family: 'Montserrat', sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  
+
   --black: #311F09;
   --dark-blue: #00245C;
   --ocean: #1c4c5c;
@@ -35,16 +38,16 @@
   /* color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
-  
+
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */
 
-  
+
 }
-/* 
+/*
 a {
   font-weight: 500;
   color: #646cff;

@@ -18,6 +18,7 @@ AOS.init({
   duration: 800,
   once: false,
   mirror: true,
+  disable: () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
 });
 
 router.afterEach(() => {

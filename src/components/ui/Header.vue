@@ -1,132 +1,135 @@
 <template>
-  <header class="w-full z-50 bg-white shadow-lg sticky top-0">
+  <header
+    class="w-full z-50 transition-all duration-300"
+    :class="[
+      isHome ? 'fixed top-0 left-0' : 'sticky top-0 bg-white shadow-lg',
+      isHome && !isScrolled ? 'bg-gradient-to-b from-black/80 via-black/40 to-transparent text-white' : 'bg-white/95 backdrop-blur-md shadow-md text-gray-900'
+    ]"
+  >
     <div class="max-w-7xl mx-auto">
-      <!-- Main Header -->
       <div class="flex justify-between items-center py-4 px-4 sm:px-6 lg:px-8">
-        <!-- Logo -->
-        <router-link to="/" class="flex-shrink-0 order-2 md:order-1">
-          <img 
-            src="/src/assets/images/hed-logo.png" 
-            alt="Hurshida Enter Delux Logo" 
-            class="h-12 w-auto hover:scale-105 transition-transform duration-300" 
+        
+        <!-- Mobile Left Hamburger Button -->
+        <button
+          ref="menuButton"
+          @click="toggleSidebar"
+          class="xl:hidden p-2 rounded-xl transition-colors focus:outline-none"
+          :class="[
+            isHome && !isScrolled ? 'text-white hover:bg-white/10' : 'text-gray-700 hover:bg-gray-100'
+          ]"
+          aria-label="Открыть меню"
+          aria-controls="inner-mobile-menu"
+          :aria-expanded="isSidebarOpen"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+
+        <!-- Brand Logo -->
+        <router-link to="/" class="flex-shrink-0 flex items-center">
+          <img
+            src="/src/assets/images/hed-logo.png"
+            alt="Hurshida Enter Delux Logo"
+            class="h-11 sm:h-12 w-auto hover:scale-105 transition-transform duration-300"
+            :class="{ 'brightness-0 invert': isHome && !isScrolled }"
           />
         </router-link>
 
         <!-- Desktop Navigation -->
-        <nav class="hidden md:flex items-center space-x-8 order-2">
-          <div v-for="link in links" :key="link.text" class="relative group">
-            <router-link 
-              v-if="!link.isComponent" 
+        <nav class="hidden xl:flex items-center space-x-7">
+          <template v-for="link in links" :key="link.text">
+            <router-link
+              v-if="!link.isComponent"
               :to="link.link"
-              class="text-gray-700 hover:text-Blue font-medium transition-all duration-300 relative py-2"
-              :class="{ 
-                'text-Blue font-semibold': route.path === link.link,
-              }"
+              class="font-medium transition-all duration-300 relative py-2 text-base"
+              :class="[
+                isHome && !isScrolled
+                  ? (route.path === link.link ? 'text-lightBlue font-bold' : 'text-white hover:text-lightBlue')
+                  : (route.path === link.link ? 'text-Blue font-bold' : 'text-gray-700 hover:text-Blue')
+              ]"
             >
               {{ link.text }}
-              <!-- Active Indicator -->
-              <span 
+              <span
                 v-if="route.path === link.link"
-                class="absolute bottom-0 left-0 w-full h-0.5 bg-Blue"
-              ></span>
-              <!-- Hover Indicator -->
-              <span 
-                class="absolute bottom-0 left-0 w-0 h-0.5 bg-lightBlue transition-all duration-300 group-hover:w-full"
+                class="absolute bottom-0 left-0 w-full h-0.5"
+                :class="isHome && !isScrolled ? 'bg-lightBlue' : 'bg-Blue'"
               ></span>
             </router-link>
-            <ComplainsMenu v-else />
-          </div>
+            <ComplainsMenu v-else :tone="isHome && !isScrolled ? 'light' : 'dark'" />
+          </template>
         </nav>
 
-        <!-- Right Actions -->
-        <div class="flex items-center gap-4 order-3">
-          <!-- Search Button -->
-          <button 
-            @click="toggleSearch" 
-            class="p-2 rounded-lg hover:bg-gray-100 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-Blue/20" 
-            aria-label="Поиск"
-          >
-            <svg class="w-5 h-5 text-gray-700 hover:text-Blue transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </button>
-
-          <!-- Mobile Menu Button -->
-          <button 
-            @click="toggleSidebar" 
-            class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-Blue/20" 
-            aria-label="Меню"
-          >
-            <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      <!-- Search Bar (Collapsible) -->
-      <div 
-        ref="searchContainer" 
-        class="overflow-hidden transition-all duration-300 ease-in-out border-t border-gray-100"
-        :style="{ maxHeight: isSearchOpen ? '80px' : '0' }"
-      >
-        <div class="bg-gradient-to-br from-gray-50 to-gray-100 py-4 px-4 sm:px-6 lg:px-8">
-          <div class="max-w-2xl mx-auto flex gap-2">
-            <input 
-              type="text" 
-              placeholder="Поиск по сайту..." 
-              class="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-Blue focus:border-transparent outline-none transition-all"
-            />
-            <button class="bg-Blue hover:bg-darkBlue text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-300 shadow-lg hover:shadow-xl">
-              Найти
-            </button>
-          </div>
-        </div>
       </div>
     </div>
+
+    <!-- Universal Mobile Sidebar Drawer -->
+    <Sidebar ref="sidebar" :is-open="isSidebarOpen" :toggle-sidebar="toggleSidebar" />
   </header>
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { computed, nextTick, onBeforeUnmount, onMounted, ref } from "vue"
 import { useRoute } from "vue-router"
 import ComplainsMenu from "@/components/sections/ComplainsMenu.vue"
+import Sidebar from '@/components/Sidebar.vue'
 
 const route = useRoute()
-const isSearchOpen = ref(false)
+const isSidebarOpen = ref(false)
+const isScrolled = ref(false)
+const menuButton = ref(null)
+const sidebar = ref(null)
 
-const toggleSearch = () => {
-  isSearchOpen.value = !isSearchOpen.value
+const isHome = computed(() => route.path === '/')
+
+const handleScroll = () => {
+  requestAnimationFrame(() => {
+    isScrolled.value = window.scrollY > 40
+  })
 }
 
-// Эта функция должна быть определена в родительском компоненте или Pinia store
-const toggleSidebar = () => {
-  // Добавьте вашу логику для открытия сайдбара
-  console.log('Toggle sidebar')
+const toggleSidebar = async () => {
+  isSidebarOpen.value = !isSidebarOpen.value
+  document.body.style.overflow = isSidebarOpen.value ? 'hidden' : ''
+  if (isSidebarOpen.value) {
+    window.addEventListener('keydown', handleSidebarKeydown)
+    await nextTick()
+    sidebar.value?.$el?.querySelector('button, a[href]')?.focus()
+  } else {
+    window.removeEventListener('keydown', handleSidebarKeydown)
+    await nextTick()
+    menuButton.value?.focus()
+  }
 }
+
+const handleSidebarKeydown = (event) => {
+  if (event.key === 'Escape' && isSidebarOpen.value) toggleSidebar()
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll, { passive: true })
+  handleScroll()
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', handleScroll)
+  window.removeEventListener('keydown', handleSidebarKeydown)
+  document.body.style.overflow = ''
+})
 
 const links = [
   { text: "Главная", link: "/" },
   { text: "О нас", link: "/about" },
-  { text: "Продукция", link: "/products" },
   { text: "Новости", link: "/news" },
-  { text: 'Направление', link:'/direction' },
+  { text: "Направление", link: "/direction" },
+  { text: "Наша команда", link: "/ourteam" },
   { text: "Контакты", link: "/contacts" },
- { text: "Наша команда", link: "/ourteam" },
-  { isComponent: true }
+  { text: "Комплаенс", isComponent: true },
 ]
 </script>
 
 <style scoped>
-/* Sticky header with smooth shadow transition */
 header {
-  transition: box-shadow 0.3s ease;
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-  .flex-shrink-0 {
-    order: 2;
-  }
+  will-change: transform, background-color;
 }
 </style>

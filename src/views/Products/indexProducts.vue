@@ -16,9 +16,9 @@
       </div>
 
       <!-- BRAND BUTTONS SECTION (Matnlardan keyin, Products Grid'dan oldin) -->
-      <div 
+      <div
         class="flex flex-wrap items-center justify-center gap-4 mb-12"
-        data-aos="fade-up" 
+        data-aos="fade-up"
         data-aos-duration="800"
       >
         <!-- Albadent Tugmasi -->
@@ -29,10 +29,10 @@
         >
           <img :src="albadentImg" alt="Albadent" class="w-6 h-6 object-cover rounded" />
           <span>Albadent</span>
-          <svg 
-            class="w-4 h-4 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" 
-            fill="none" 
-            stroke="currentColor" 
+          <svg
+            class="w-4 h-4 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200"
+            fill="none"
+            stroke="currentColor"
             viewBox="0 0 24 24"
           >
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -47,10 +47,10 @@
         >
           <img :src="daantecImg" alt="Daantec" class="w-6 h-6 object-cover rounded" />
           <span>Daantec</span>
-          <svg 
-            class="w-4 h-4 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" 
-            fill="none" 
-            stroke="currentColor" 
+          <svg
+            class="w-4 h-4 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200"
+            fill="none"
+            stroke="currentColor"
             viewBox="0 0 24 24"
           >
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 0 0-2 2v10a2 2 0 0 02 2h10a2 2 0 0 02-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -61,7 +61,7 @@
       <!-- Products Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 xl:gap-8">
         <article
-          v-for="(product, index) in products"
+          v-for="(product, index) in filteredProducts"
           :key="product.slug"
           data-aos="fade-up"
           :data-aos-delay="index * 100"
@@ -179,8 +179,8 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { computed, ref } from "vue";
+import { useRoute } from "vue-router";
 
 // Tugmalar rasmlari
 import albadentImg from "@/assets/images/direction/image.png";
@@ -192,8 +192,6 @@ import dcefImg from "@/assets/product-card/d-cef.png";
 import infuziolImg from "@/assets/product-card/infuziol.png";
 import letokarImg from "@/assets/product-card/letokar.png";
 import lifeonImg from "@/assets/product-card/life-on.png";
-
-const router = useRouter();
 
 // Tashqi mahsulotlar sahifasini ochuvchi funksiya
 const openExternalProduct = (url) => {
@@ -253,6 +251,14 @@ const products = ref([
       "Life-On — сбалансированный витаминно-минеральный комплекс. Содержит все необходимые витамины и минералы для поддержания здоровья и активного образа жизни.",
   },
 ]);
+
+const route = useRoute();
+const filteredProducts = computed(() => {
+  const search = String(route.query.search || '').trim().toLocaleLowerCase('ru-RU');
+  if (!search) return products.value;
+  return products.value.filter((product) => [product.name, product.manufacturer, product.description]
+    .some((value) => String(value || '').toLocaleLowerCase('ru-RU').includes(search)));
+});
 </script>
 
 <style scoped>
