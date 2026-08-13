@@ -37,14 +37,15 @@
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import desktopVideoSource from '@/assets/videos/hed-video.mp4'
 import mobileVideoSource from '@/assets/videos/hed-video-mobile.mp4'
+import heroPoster from '@/assets/images/hero.jpg'
+import heroMobilePoster from '@/assets/images/hero-mobile.jpg'
 
 const videoLoaded = ref(false)
 const videoRef = ref(null)
 const reducedMotion = ref(false)
-const publicAssetUrl = (filename) => `${import.meta.env.BASE_URL}${filename}`
 const posterSource = window.matchMedia('(max-width: 767px)').matches
-  ? publicAssetUrl('hero-mobile.jpg')
-  : publicAssetUrl('hero.jpg')
+  ? heroMobilePoster
+  : heroPoster
 
 const handleCanPlay = () => {
   videoLoaded.value = true

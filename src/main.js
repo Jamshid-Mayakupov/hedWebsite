@@ -4,7 +4,6 @@ import router from "./router";
 
 import "./index.css";
 import "./style.css";
-import "./assets/sass/main.scss";
 
 import AOS from "aos";
 import "aos/dist/aos.css";
