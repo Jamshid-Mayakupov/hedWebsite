@@ -137,23 +137,8 @@
           </div>
 
           <!-- Share & Actions Bar -->
-          <div class="pt-8 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div class="flex items-center space-x-3">
-              <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Поделиться:</span>
-              <button
-                @click="shareTelegram"
-                class="px-4 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-semibold transition-all flex items-center space-x-1.5 cursor-pointer"
-              >
-                <span>Telegram</span>
-              </button>
-              <button
-                @click="copyPageUrl"
-                class="px-4 py-2 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-semibold transition-all cursor-pointer"
-              >
-                {{ copied ? '✓ Ссылка скопирована' : 'Скопировать ссылку' }}
-              </button>
-            </div>
-
+          <!-- Back to News Button -->
+          <div class="pt-8 border-t border-gray-100 flex justify-between items-center">
             <router-link
               to="/news"
               class="inline-flex items-center space-x-2 px-6 py-2.5 rounded-xl bg-Blue hover:bg-lightBlue text-white font-semibold text-sm shadow-sm transition-all"
@@ -327,8 +312,6 @@ import sumalakImg from '@/assets/images/sumalak-party.jpg'
 const route = useRoute()
 const router = useRouter()
 const story = ref(null)
-const copied = ref(false)
-
 // Video Modal
 const isVideoModalOpen = ref(false)
 const activeVideoId = ref('')
@@ -505,20 +488,6 @@ const relatedNews = computed(() => {
 const goToRelated = (slug) => {
   window.scrollTo({ top: 0, behavior: 'instant' })
   router.push(`/news/${slug}`)
-}
-
-const shareTelegram = () => {
-  const url = encodeURIComponent(window.location.href)
-  const title = encodeURIComponent(story.value?.title || 'Новость HURSHIDA ENTER DELUX')
-  window.open(`https://t.me/share/url?url=${url}&text=${title}`, '_blank')
-}
-
-const copyPageUrl = () => {
-  navigator.clipboard?.writeText(window.location.href)
-  copied.value = true
-  setTimeout(() => {
-    copied.value = false
-  }, 3000)
 }
 
 const handleKeydown = (e) => {

@@ -27,7 +27,6 @@
           @click="openExternalProduct('https://albadent.uz/products')"
           class="inline-flex items-center gap-3 px-6 py-3 bg-white border border-gray-200 text-gray-800 font-semibold rounded-xl shadow-sm hover:bg-[#13227a] hover:border-[#13227a] hover:text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md group cursor-pointer"
         >
-          <img :src="albadentImg" alt="Albadent" class="w-6 h-6 object-cover rounded" />
           <span>Albadent</span>
           <svg
             class="w-4 h-4 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200"
@@ -45,7 +44,6 @@
           @click="openExternalProduct('https://daantec.uz/catalog')"
           class="inline-flex items-center gap-3 px-6 py-3 bg-white border border-gray-200 text-gray-800 font-semibold rounded-xl shadow-sm hover:bg-[#13227a] hover:border-[#13227a] hover:text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md group cursor-pointer"
         >
-          <img :src="daantecImg" alt="Daantec" class="w-6 h-6 object-cover rounded" />
           <span>Daantec</span>
           <svg
             class="w-4 h-4 opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200"
@@ -181,10 +179,6 @@
 <script setup>
 import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
-
-// Tugmalar rasmlari
-import albadentImg from "@/assets/images/direction/image.png";
-import daantecImg from "@/assets/images/direction/image copy.png";
 
 // Mahsulotlar rasmlari
 import antagrixImg from "@/assets/product-card/antagrix.png";
