@@ -113,15 +113,24 @@
           </div>
 
           <!-- Drawer Footer Info -->
-          <div class="p-5 border-t border-gray-100 bg-gray-50/80 space-y-3">
+          <div class="p-5 border-t border-gray-100 bg-gray-50/80 space-y-2">
             <a
-              href="tel:+998998637707"
-              class="flex items-center space-x-3 px-4 py-3 rounded-xl bg-Blue text-white font-semibold text-sm shadow-md hover:bg-darkBlue transition-colors justify-center"
+              href="tel:+998957313148"
+              class="flex items-center space-x-3 px-4 py-2.5 rounded-xl bg-Blue text-white font-semibold text-xs sm:text-sm shadow-md hover:bg-darkBlue transition-colors justify-center"
             >
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
-              <span>+998 (99) 863-77-07</span>
+              <span>+998 95 731 31 48</span>
+            </a>
+            <a
+              href="tel:+998915406268"
+              class="flex items-center space-x-3 px-4 py-2.5 rounded-xl bg-white border border-gray-200 text-gray-800 font-semibold text-xs sm:text-sm shadow-sm hover:border-Blue/40 hover:text-Blue transition-colors justify-center"
+            >
+              <svg class="w-4 h-4 text-Blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              <span>+998 91 540 62 68</span>
             </a>
             <p class="text-center text-xs text-gray-400 font-medium">
               © HURSHIDA ENTER DELUX

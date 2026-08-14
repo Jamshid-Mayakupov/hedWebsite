@@ -127,7 +127,7 @@
           <!-- Contact Info -->
           <div class="bg-gray-100 rounded-xl p-6 border border-gray-200">
             <p class="text-sm text-gray-600 mb-2">Нужна консультация?</p>
-            <p class="text-lg font-semibold text-gray-900 mb-1">+998 (99) 863-77-07</p>
+            <p class="text-lg font-semibold text-gray-900 mb-1">+998 95 731 31 48</p>
             <p class="text-sm text-gray-600">info@hurshidadelux.com</p>
           </div>
         </div>

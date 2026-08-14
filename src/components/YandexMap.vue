@@ -155,7 +155,7 @@ const locations = [
     city: "Ташкент",
     type: "Главный офис",
     address: "ул. Гейдара Алиева, 313",
-    phone: "+998 (99) 863-77-07",
+    phone: "+998 95 731 31 48",
     hours: "09:00 - 18:00",
     name: "HURSHIDA ENTER DELUX"
   }
