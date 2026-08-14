@@ -107,6 +107,9 @@ import { useRouter } from 'vue-router'
 import api from '@/utils/axios'
 import { buildFileUrl } from '@/utils/media'
 
+import news1_1 from '@/assets/images/news/news-1.1.jpg'
+import sumalakImg from '@/assets/images/sumalak-party.jpg'
+
 const router = useRouter()
 
 const openNews = (slug) => {
@@ -126,30 +129,30 @@ const openNewsAll = () => {
 const newsItems = ref([
   {
     id: 1,
+    title: "В дом, куда пришла вода, приходит радость",
+    description: "По инициативе и при спонсорской поддержке основателей компании «HURSHIDA ENTER DELUX» более 2300 жителей обеспечены чистой питьевой водой.",
+    image: news1_1,
+    date: "Август 2026",
+    category: "Общество",
+    slug: "v-dom-kuda-prishla-voda-prihodit-radost"
+  },
+  {
+    id: 2,
     title: "Грандиозное празднование Sumalak Party 2025",
     description: "Компания организовала незабываемое мероприятие, посвященное традиционному весеннему празднику.",
-    image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80",
+    image: sumalakImg,
     date: "Март 2025",
     category: "События",
     slug: "grandioznoe-prazdnovanie-sumalak-party-2025"
   },
   {
-    id: 2,
+    id: 3,
     title: "Новые достижения компании в области инноваций",
     description: "Представлены революционные решения, которые изменят подход к современному бизнесу.",
     image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&q=80",
     date: "Март 2025",
     category: "Инновации",
     slug: "novye-dostizheniya-kompanii-v-oblasti-innovacij"
-  },
-  {
-    id: 3,
-    title: "Расширение команды и новые возможности",
-    description: "Компания объявила о наборе 50 новых специалистов в различных областях.",
-    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80",
-    date: "Март 2025",
-    category: "Компания",
-    slug: "rasshirenie-komandy-i-novye-vozmozhnosti"
   }
 ])
 

@@ -38,10 +38,10 @@
           </div>
 
           <div class="space-y-3 mb-8">
-            <span class="text-xs uppercase tracking-widest font-bold text-Blue">Основная линия • Дистрибуция</span>
-            <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-900 font-raleway">Отдел продаж и поставок</h3>
+            <span class="text-xs uppercase tracking-widest font-bold text-Blue">Прямая линия • Руководство</span>
+            <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-900 font-raleway">Директор</h3>
             <p class="text-sm text-gray-600 leading-relaxed">
-              Консультации по лекарственным препаратам, заказам и договорам поставок.
+              Общие вопросы, стратегические решения и развитие партнерства.
             </p>
           </div>
 
@@ -72,10 +72,10 @@
           </div>
 
           <div class="space-y-3 mb-8">
-            <span class="text-xs uppercase tracking-widest font-bold text-Blue">Сотрудничество • Партнерство</span>
-            <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-900 font-raleway">Отдел развития и проектов</h3>
+            <span class="text-xs uppercase tracking-widest font-bold text-Blue">Администрация • Управление</span>
+            <h3 class="text-2xl sm:text-3xl font-extrabold text-gray-900 font-raleway">Руководитель административного отдела</h3>
             <p class="text-sm text-gray-600 leading-relaxed">
-              Международные поставки, тендеры и стратегические партнерские соглашения.
+              Административные вопросы, документооборот и операционная деятельность.
             </p>
           </div>
 
