@@ -46,13 +46,14 @@
           </div>
 
           <a
-            href="tel:+998957313148"
+            href="tel:+998915406268"
             class="inline-flex items-center justify-center space-x-3 w-full py-4 px-6 rounded-2xl bg-Blue hover:bg-lightBlue text-white font-bold text-lg sm:text-xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
             </svg>
-            <span>+998 95 731 31 48</span>
+            <span>+998 91 540 62 68</span>
           </a>
+
         </div>
 
         <!-- Contact Card 2 -->
@@ -80,12 +81,12 @@
           </div>
 
           <a
-            href="tel:+998915406268"
+            href="tel:+998957313148"
             class="inline-flex items-center justify-center space-x-3 w-full py-4 px-6 rounded-2xl bg-Blue hover:bg-lightBlue text-white font-bold text-lg sm:text-xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
             <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
             </svg>
-            <span>+998 91 540 62 68</span>
+            <span>+998 95 731 31 48</span>
           </a>
         </div>
 
