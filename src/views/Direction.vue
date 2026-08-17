@@ -721,15 +721,15 @@ const projectsList = ref([
     metaBadge: 'Стоматологические системы • Конгрессы & Обучение',
     image: alba1,
     videoPoster: alba1,
-    youtubeVideoId: 'ic-eAWW9VAU',
+    youtubeVideoId: 'bNYh1glC6nk',
     videos: [
       {
-        id: 'ic-eAWW9VAU',
+        id: 'bNYh1glC6nk',
         title: 'Инновационные стоматологические решения Alba Dent',
         poster: alba1
       },
       {
-        id: 'XpK8RCtFocA',
+        id: '_ppjfvHiK6o',
         title: 'Мастер-классы и практическое обучение врачей-стоматологов',
         poster: alba4
       }
@@ -879,13 +879,15 @@ const projectsList = ref([
       }
     ]
   },
-    {
+  {
     id: 'neotron',
     title: 'Neotron',
     subtitle: 'Высокотехнологичные сосудистые стент-системы Boston Scientific и решения для эндоваскулярной хирургии',
     category: 'Эндоваскулярная хирургия',
     metaBadge: 'Boston Scientific • Promus ELITE • Wallstent-Uni™',
     image: neotronImg,
+    videoPoster: neotronImg,
+    youtubeVideoId: '0RURnR8ISys',
     description: 'Neotron — специализированное высокотехнологичное направление компании, осуществляющее поставку передовых решений для эндоваскулярной хирургии и интервенционной кардиологии. Мы являемся официальным партнером и дистрибьютором мирового лидера Boston Scientific, поставляя сертифицированные коронарные и периферические стент-системы, инновационные саморасширяющиеся стенты и катетеры высокой проходимости в ведущие кардиохирургические центры.',
     tags: ['Boston Scientific', 'Promus ELITE', 'Wallstent-Uni™', 'Эндоваскулярная хирургия', 'Интервенционная кардиология'],
     sections: [
