@@ -95,24 +95,58 @@
               </div>
             </div>
 
-            <!-- Hero Showcase Image -->
-            <div class="relative overflow-hidden rounded-3xl shadow-xl border border-gray-200/80 group" v-if="activeProject.image">
-              <img
-                :src="activeProject.image"
-                :alt="activeProject.title"
-                class="w-full h-[280px] sm:h-[400px] md:h-[480px] object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-              />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-              
-              <!-- Bottom Image Glass Badge -->
-              <div class="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 p-4 sm:p-5 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 text-white flex items-center justify-between shadow-lg">
-                <div>
-                  <span class="text-[11px] uppercase tracking-widest font-bold text-cyan-300">Направление группы HURSHIDA</span>
-                  <h3 class="text-sm sm:text-base font-bold font-raleway">{{ activeProject.title }}</h3>
+            <!-- Hero Showcase Image / Video Presentation Card -->
+            <div
+              v-if="activeProject.image"
+              class="relative overflow-hidden rounded-3xl shadow-xl border border-gray-200/80 group"
+              :class="{ 'cursor-pointer': activeProject.youtubeVideoId }"
+              @click="activeProject.youtubeVideoId ? openVideoModal(activeProject.youtubeVideoId) : null"
+            >
+              <div class="relative h-72 sm:h-96 md:h-[450px] w-full overflow-hidden bg-gray-900">
+                <img
+                  :src="activeProject.videoPoster || activeProject.image"
+                  :alt="activeProject.title"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-95"
+                />
+                <div class="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors" v-if="activeProject.youtubeVideoId"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" v-else></div>
+
+                <!-- Elegant Center Play Button (Identical to News Section) -->
+                <div v-if="activeProject.youtubeVideoId" class="absolute inset-0 flex items-center justify-center">
+                  <div class="w-18 h-18 sm:w-20 sm:h-20 rounded-full bg-white/90 backdrop-blur-md text-gray-900 shadow-2xl flex items-center justify-center group-hover:scale-110 group-hover:bg-white transition-all duration-300 border border-white/80">
+                    <svg class="w-8 h-8 sm:w-9 sm:h-9 ml-1 text-Blue" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
                 </div>
-                <span class="px-3 py-1 rounded-full bg-white/20 text-white text-xs font-bold tracking-wider backdrop-blur-sm border border-white/30 hidden sm:inline-block">
-                  {{ activeProject.category }}
-                </span>
+
+                <!-- Bottom Video Info Bar (Identical to News Section) -->
+                <div class="absolute bottom-0 inset-x-0 p-5 sm:p-6 bg-gradient-to-t from-black/80 via-black/50 to-transparent flex items-center justify-between text-white">
+                  <div>
+                    <span class="text-[11px] uppercase tracking-wider text-gray-300 font-semibold">
+                      {{ activeProject.youtubeVideoId ? 'Видеопрезентация направления' : 'Направление группы HURSHIDA' }}
+                    </span>
+                    <h3 class="text-sm sm:text-base font-bold font-raleway">
+                      {{ activeProject.youtubeVideoId ? `Смотреть видео о ${activeProject.title}` : activeProject.title }}
+                    </h3>
+                  </div>
+
+                  <div
+                    v-if="activeProject.youtubeVideoId"
+                    class="px-3.5 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-semibold tracking-wider flex items-center space-x-1.5 border border-white/30 shadow-md"
+                  >
+                    <svg class="w-3.5 h-3.5 fill-current text-red-500" viewBox="0 0 24 24">
+                      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                    <span>YouTube</span>
+                  </div>
+                  <span
+                    v-else
+                    class="px-3 py-1 rounded-full bg-white/20 text-white text-xs font-bold tracking-wider backdrop-blur-sm border border-white/30 hidden sm:inline-block"
+                  >
+                    {{ activeProject.category }}
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -258,71 +292,168 @@
 
           </div>
 
+          <!-- E. Videos Showcase Section (When project has multiple videos) -->
+          <div class="bg-white rounded-3xl p-8 sm:p-12 border border-gray-200/80 shadow-xl space-y-6" v-if="activeProject.videos && activeProject.videos.length > 1">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-100 pb-4">
+              <div>
+                <h3 class="text-xl sm:text-2xl font-extrabold text-gray-900 font-raleway">
+                  Видеоматериалы & Обзоры
+                </h3>
+                <p class="text-xs sm:text-sm text-gray-500 mt-0.5">
+                  Официальные видеоролики и презентации направления {{ activeProject.title }}
+                </p>
+              </div>
+              <span class="inline-flex items-center px-3 py-1 rounded-full bg-red-50 text-red-600 border border-red-200 text-xs font-bold uppercase tracking-wider">
+                <svg class="w-3.5 h-3.5 fill-current mr-1.5" viewBox="0 0 24 24">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                <span>{{ activeProject.videos.length }} видео</span>
+              </span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div
+                v-for="(vid, vIdx) in activeProject.videos"
+                :key="vIdx"
+                class="relative rounded-2xl overflow-hidden shadow-md border border-gray-200/80 group cursor-pointer bg-gray-900"
+                @click="openVideoModal(vid.id)"
+              >
+                <div class="h-60 sm:h-72 w-full overflow-hidden relative">
+                  <img
+                    :src="vid.poster || activeProject.image"
+                    :alt="vid.title"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
+                  />
+                  <div class="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors"></div>
+
+                  <!-- Center Play Button -->
+                  <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white/90 backdrop-blur-md text-gray-900 shadow-xl flex items-center justify-center group-hover:scale-110 group-hover:bg-white transition-all duration-300 border border-white/80">
+                      <svg class="w-6 h-6 sm:w-7 sm:h-7 ml-0.5 text-Blue" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+
+                  <!-- Bottom Info Bar -->
+                  <div class="absolute bottom-0 inset-x-0 p-4 sm:p-5 bg-gradient-to-t from-black/80 via-black/50 to-transparent flex items-center justify-between text-white">
+                    <div class="pr-2">
+                      <span class="text-[10px] uppercase tracking-wider text-gray-300 font-semibold">Видео {{ vIdx + 1 }}</span>
+                      <h4 class="text-xs sm:text-sm font-bold font-raleway line-clamp-1">{{ vid.title }}</h4>
+                    </div>
+                    <div class="shrink-0 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[11px] font-semibold tracking-wider flex items-center space-x-1 border border-white/30">
+                      <svg class="w-3 h-3 fill-current text-red-500" viewBox="0 0 24 24">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                      </svg>
+                      <span>YouTube</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </transition>
 
     </div>
+
+    <!-- 4. Interactive YouTube Video Popup Modal -->
+    <Teleport to="body">
+      <Transition
+        enter-active-class="transition duration-300 ease-out"
+        enter-from-class="opacity-0"
+        enter-to-class="opacity-100"
+        leave-active-class="transition duration-200 ease-in"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0"
+      >
+        <div
+          v-if="isVideoModalOpen"
+          class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md"
+          @click.self="closeVideoModal"
+          @keydown.esc="closeVideoModal"
+        >
+          <div class="relative w-full max-w-4xl bg-black rounded-3xl overflow-hidden shadow-2xl border border-white/20">
+            <!-- Close Button -->
+            <button
+              @click="closeVideoModal"
+              class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-all hover:scale-105 cursor-pointer"
+              aria-label="Закрыть видео"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            <!-- Video Player (16:9 Aspect Ratio) -->
+            <div class="relative w-full aspect-video">
+              <iframe
+                :src="`https://www.youtube-nocookie.com/embed/${currentVideoId}?autoplay=1&rel=0`"
+                title="YouTube video player"
+                class="w-full h-full"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
+
   </section>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import AOS from 'aos'
 import schoolStemLab from '@/assets/images/school-stem-lab.jpg'
+import inspiringSchoolImg from '@/assets/images/directions/inspiring-school.png'
+import daantecPed1 from '@/assets/images/directions/daantec-ped-1.JPG'
+import daantecPed2 from '@/assets/images/directions/daantec-ped-2.jpg'
+import daantecPed3 from '@/assets/images/directions/daantec-ped-3.JPG'
+import daantecPed4 from '@/assets/images/directions/daantec-ped-4.jfif'
+import daantec1 from '@/assets/images/directions/daantec-1.PNG'
+import daantec2 from '@/assets/images/directions/daantec-2.jpg'
+import daantec3 from '@/assets/images/directions/daantec-3.PNG'
+import daantec4 from '@/assets/images/directions/daantec-4.JPG'
+import alba1 from '@/assets/images/directions/alba-1.png'
+import alba2 from '@/assets/images/directions/alba-2.png'
+import alba3 from '@/assets/images/directions/alba-3.png'
+import alba4 from '@/assets/images/directions/alba-4.png'
+import neotronPromus from '@/assets/images/directions/neotron-promus.png'
+import neotronWallstent1 from '@/assets/images/directions/neotron-wallstent-1.png'
+import neotronWallstent2 from '@/assets/images/directions/neotron-wallstent-2.png'
+import neotronImg from '@/assets/images/directions/neotron.png'
 
 const route = useRoute()
 const router = useRouter()
 
+// Video Modal State
+const isVideoModalOpen = ref(false)
+const currentVideoId = ref('')
+
+const openVideoModal = (videoId) => {
+  currentVideoId.value = videoId
+  isVideoModalOpen.value = true
+  document.body.style.overflow = 'hidden'
+}
+
+const closeVideoModal = () => {
+  isVideoModalOpen.value = false
+  currentVideoId.value = ''
+  document.body.style.overflow = ''
+}
+
+const handleKeydown = (e) => {
+  if (e.key === 'Escape' && isVideoModalOpen.value) {
+    closeVideoModal()
+  }
+}
+
 const projectsList = ref([
-  {
-    id: 'neotron',
-    title: 'Neotron',
-    subtitle: 'Современные решения для эндоваскулярной хирургии и интервенционной кардиологии',
-    category: 'Эндоваскулярная хирургия',
-    metaBadge: 'Интервенционная медицина',
-    image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=80',
-    description: 'Neotron — специализированное направление компании, осуществляющее поставку современных решений для эндоваскулярной хирургии. Мы предлагаем широкий ассортимент периферических сосудистых стентов, баллонных катетеров и другой высокотехнологичной продукции от ведущих мировых производителей. Наша цель — обеспечить медицинские учреждения надежными и инновационными решениями, способствующими эффективному лечению пациентов и развитию современной интервенционной медицины.',
-    tags: ['Эндоваскулярная хирургия', 'Сосудистые стенты', 'Баллонные катетеры', 'Интервенционная медицина', 'Малоинвазивная хирургия'],
-    sections: [
-      {
-        title: 'Наша стратегическая цель',
-        text: 'Обеспечить медицинские центры и кардиохирургические клиники надежными и инновационными изделиями для малоинвазивных вмешательств, способствующими эффективному лечению пациентов и ускоренной реабилитации.'
-      },
-      {
-        title: 'Высокотехнологичный портфель',
-        text: 'Инновационные разработки для современной интервенционной хирургии от ведущих мировых производителей.',
-        items: [
-          'Периферические и коронарные сосудистые стенты нового поколения',
-          'Специализированные баллонные катетеры высокого давления',
-          'Высокоточные проводники и микрокатетеры для сосудистых операций'
-        ]
-      }
-    ],
-    metrics: [
-      { value: '100%', label: 'Безопасность и клиническая точность' },
-      { value: 'ISO / CE', label: 'Международные стандарты качества' },
-      { value: '24/7', label: 'Консультации специалистов' },
-      { value: 'Top', label: 'Мировые производители' }
-    ],
-    advantages: [
-      {
-        title: 'Мировые стандарты',
-        text: 'Прямые поставки сертифицированной продукции с гарантией оригинальности.',
-        image: 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=600&q=80'
-      },
-      {
-        title: 'Экспертная поддержка',
-        text: 'Консультации и обучение специалистов правильной технике применения изделий.',
-        image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80'
-      },
-      {
-        title: 'Клиническая эффективность',
-        text: 'Снижение рисков повторных стенозов и сокращение времени госпитализации.',
-        image: 'https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&w=600&q=80'
-      }
-    ]
-  },
   {
     id: 'aortica',
     title: 'Аортика',
@@ -427,6 +558,8 @@ const projectsList = ref([
     category: 'Маркетинг & Дистрибуция',
     metaBadge: 'OTC Сегмент • Аптечный ритейл',
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
+    videoPoster: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
+    youtubeVideoId: 'WRhpQ19a8Yw',
     description: 'HED Marketing — направление компании, специализирующееся на дистрибуции безрецептурной (OTC) продукции для аптечных сетей и розничного фармацевтического рынка. В нашем портфеле представлены современные товары для здоровья и повседневного ухода. Мы сотрудничаем с ведущими международными производителями, обеспечивая рынок качественными, безопасными и эффективными решениями для поддержания здоровья и повышения качества жизни.',
     tags: ['OTC Продукция', 'Аптечные сети', 'Товары для здоровья', 'Фарм-маркетинг', 'Дистрибуция'],
     sections: [
@@ -474,8 +607,10 @@ const projectsList = ref([
     subtitle: 'Современная международная школа нового поколения и углубленное развитие лидеров',
     category: 'Международное образование',
     metaBadge: 'Кембриджская программа • Олимпиады',
-    image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1200&q=80',
-    description: 'Inspiring Education School — современная международная школа, ориентированная на подготовку нового поколения успешных и конкурентодоступных лидеров. Образовательный процесс сочетает высокие академические стандарты, современные методики обучения и всестороннее развитие личности. Особое внимание уделяется углубленному изучению иностранных языков, включая китайский язык с преподаванием носителями языка. Ученики школы регулярно становятся победителями и призерами национальных и международных олимпиад, демонстрируя высокий уровень знаний и подготовки. Наша миссия — создать образовательную среду, в которой каждый ребенок раскрывает свой потенциал, развивает критическое мышление, лидерские качества и уверенно готовится к обучению и успешной карьере в глобальном мире.',
+    image: inspiringSchoolImg,
+    youtubeVideoId: 'afkahtlfZpE',
+    videoPoster: inspiringSchoolImg,
+    description: 'Inspiring Education School — современная международная школа, ориентированная на подготовку нового поколения успешных и конкурентоспособных лидеров. Образовательный процесс сочетает высокие академические стандарты, современные методики обучения и всестороннее развитие личности. Особое внимание уделяется углубленному изучению иностранных языков, включая китайский язык с преподаванием носителями языка. Ученики школы регулярно становятся победителями и призерами национальных и международных олимпиад, демонстрируя высокий уровень знаний и подготовки. Наша миссия — создать образовательную среду, в которой каждый ребенок раскрывает свой потенциал, развивает критическое мышление, лидерские качества и уверенно готовится к обучению и успешной карьере в глобальном мире.',
     tags: ['Международная школа', 'Китайский с носителями', 'STEM Образование', 'Олимпиадная подготовка', 'Критическое мышление'],
     sections: [
       {
@@ -522,7 +657,21 @@ const projectsList = ref([
     subtitle: 'Специализированная педиатрическая продукция, витамины и БАДы',
     category: 'Педиатрия',
     metaBadge: 'Здоровье детей • Доказательная медицина',
-    image: 'https://images.unsplash.com/photo-1471286174890-9c112ffca5b4?auto=format&fit=crop&w=1200&q=80',
+    image: daantecPed1,
+    videoPoster: daantecPed1,
+    youtubeVideoId: 'bX3Y5WWdB_I',
+    videos: [
+      {
+        id: 'bX3Y5WWdB_I',
+        title: 'Презентация бренда Daantec Pediatrics',
+        poster: daantecPed1
+      },
+      {
+        id: 'hj3S5Mij4b8',
+        title: 'Праздник здоровья Jalkton для детей',
+        poster: daantecPed2
+      }
+    ],
     description: 'Daantec Pediatrics — специализированное направление компании, ориентированное на дистрибуцию высококачественной педиатрической продукции для поддержки здоровья и гармоничного развития детей. Портфель бренда включает современные витаминно-минеральные комплексы, биологически активные добавки и другие продукты, разработанные с учетом международных стандартов качества и безопасности. Daantec Pediatrics стремится предоставлять детям эффективные и безопасные решения, а медицинским специалистам и родителям — продукцию, отвечающую современным требованиям доказательного качества и инноваций.',
     tags: ['Педиатрия', 'Витаминные комплексы', 'Биологически активные добавки', 'Здоровье детей', 'Доказательное качество'],
     sections: [
@@ -548,31 +697,45 @@ const projectsList = ref([
     ],
     advantages: [
       {
-        title: 'Европейские стандарты',
-        text: 'Строгий контроль качества сырья и готовой продукции на каждом этапе.',
-        image: 'https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=600&q=80'
+        title: 'Линейка Jalkton & Dino Kids',
+        text: 'Премиальные комплексы Jalkton Step 1, Step 2 и Dino Kids Probiotics для активного роста, аппетита и пищеварения.',
+        image: daantecPed4
       },
       {
-        title: 'Доказательная база',
-        text: 'Формулы разработаны совместно с ведущими международными педиатрами.',
-        image: 'https://images.unsplash.com/photo-1485546246426-74dc88dec4d9?auto=format&fit=crop&w=600&q=80'
+        title: 'Международные стандарты',
+        text: 'Прямое партнерство с фармацевтическими производителями Южной Кореи и презентации на отраслевых медицинских форумах.',
+        image: daantecPed3
       },
       {
-        title: 'Приятный вкус',
-        text: 'Натуральные фруктовые вкусы, которые нравятся детям и облегчают прием.',
-        image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80'
+        title: 'Социальная миссия и праздники здоровья',
+        text: 'Организация детских фестивалей, благотворительных инициатив и интерактивных программ заботы о детях.',
+        image: daantecPed2
       }
     ]
   },
   {
     id: 'alba-dent',
     title: 'Alba Dent',
-    subtitle: 'Передовое стоматологическое оборудование и расходные материалы',
+    subtitle: 'Передовое стоматологическое оборудование, расходные материалы и обучение врачей',
     category: 'Стоматология',
-    metaBadge: 'Стоматологические системы',
-    image: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80',
+    metaBadge: 'Стоматологические системы • Конгрессы & Обучение',
+    image: alba1,
+    videoPoster: alba1,
+    youtubeVideoId: 'ic-eAWW9VAU',
+    videos: [
+      {
+        id: 'ic-eAWW9VAU',
+        title: 'Инновационные стоматологические решения Alba Dent',
+        poster: alba1
+      },
+      {
+        id: 'XpK8RCtFocA',
+        title: 'Мастер-классы и практическое обучение врачей-стоматологов',
+        poster: alba4
+      }
+    ],
     description: 'Alba Dent — специализированное высокотехнологичное направление, предлагающее клиникам современные стоматологические системы, сертифицированные имплантаты, ортопедические материалы и инновационное диагностическое оборудование премиум-класса.',
-    tags: ['Стоматология', 'Премиум материалы', 'Оборудование', 'Имплантология'],
+    tags: ['Стоматология', 'Премиум материалы', 'Оборудование', 'Имплантология', 'Обучение врачей'],
     link: {
       url: 'https://albadent.uz',
       label: 'Перейти на сайт albadent.uz'
@@ -580,51 +743,54 @@ const projectsList = ref([
     sections: [
       {
         title: 'Наша стратегическая цель',
-        text: 'Комплексное оснащение ведущих стоматологических центров передовыми технологиями, цифровыми сканерами и безопасными сертифицированными материалами для безупречного лечения пациентов.'
+        text: 'Комплексное оснащение ведущих стоматологических центров передовыми технологиями, цифровыми сканерами, безопасными сертифицированными материалами и системное повышение квалификации врачей-стоматологов.'
       },
       {
-        title: 'Комплексный сервис и поддержка',
+        title: 'Комплексный сервис и образовательные программы',
         text: 'Полный цикл услуг для стоматологических клиник любой сложности.',
         items: [
-          'Прямые поставки сертифицированной продукции',
-          'Профессиональный консалтинг и мастер-классы',
-          'Оперативное гарантийное и постгарантийное обслуживание'
+          'Прямые поставки сертифицированного оборудования и расходных материалов',
+          'Организация масштабных отраслевых конгрессов и научных симпозиумов',
+          'Практические курсы и мастер-классы на базе специализированных учебных центров',
+          'Оперативное гарантийное и сервисное инженерное обслуживание'
         ]
       }
     ],
     metrics: [
       { value: '100%', label: 'Сертифицированное качество' },
       { value: '24/7', label: 'Техническая поддержка' },
-      { value: 'Top', label: 'Оборудование премиум-класса' },
+      { value: 'IDA', label: 'Учебные мастер-классы' },
       { value: 'ISO', label: 'Международная сертификация' }
     ],
     advantages: [
       {
-        title: 'Цифровая стоматология',
-        text: '3D сканеры, томографы и фрезерные станки последнего поколения.',
-        image: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80'
+        title: 'Научные симпозиумы и конгрессы',
+        text: 'Организация масштабных стоматологических форумов с участием ведущих международных спикеров и экспертов.',
+        image: alba2
       },
       {
-        title: 'Премиум имплантология',
-        text: 'Высокоприживляемые имплантаты с пожизненной гарантией производителя.',
-        image: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=600&q=80'
+        title: 'Цифровая стоматология и 3D-технологии',
+        text: 'Внедрение передовых хирургических шаблонов, навигационной имплантации и инновационного диагностического оборудования.',
+        image: alba3
       },
       {
-        title: 'Сервисный центр',
-        text: 'Собственная служба инженеров для калибровки и обслуживания оборудования.',
-        image: 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=600&q=80'
+        title: 'Практические мастер-классы IDA',
+        text: 'Регулярное обучение специалистов на фантомных тренажерах с отработкой мануальных навыков и выдачей сертификатов.',
+        image: alba4
       }
     ]
   },
   {
     id: 'daantec',
     title: 'Daantec',
-    subtitle: 'Высокоточное диагностическое оборудование и медицинские приборы',
+    subtitle: 'Высокоточное диагностическое оборудование, комплексные поставки и сервис',
     category: 'Медицинская техника',
-    metaBadge: 'Диагностика & Медтехника',
-    image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80',
+    metaBadge: 'Caring for life • Высокие стандарты',
+    image: daantec4,
+    videoPoster: daantec4,
+    youtubeVideoId: '0RURnR8ISys',
     description: 'Daantec — авторитетный бренд, специализирующийся на поставках современного диагностического, электрофизиологического и терапевтического оборудования, помогающего медицинским учреждениям выявлять заболевания на ранних стадиях.',
-    tags: ['Диагностика', 'Электрофизиология', 'Медоборудование', 'Инновации'],
+    tags: ['Диагностика', 'Электрофизиология', 'Медоборудование', 'Инновации', 'Caring for life'],
     sections: [
       {
         title: 'Наша стратегическая цель',
@@ -632,11 +798,11 @@ const projectsList = ref([
       },
       {
         title: 'Ключевые преимущества',
-        text: 'Безупречная точность исследований и эргономичность приборов.',
+        text: 'Безупречная точность исследований, надежная логистика и эргономичность приборов.',
         items: [
           'Инновационные диагностические комплексы',
-          'Квалифицированный инженерный сервис',
-          'Экспертное сопровождение клиницистов'
+          'Квалифицированный инженерный сервис и поддержка',
+          'Собственный распределительный логистический центр'
         ]
       }
     ],
@@ -648,19 +814,19 @@ const projectsList = ref([
     ],
     advantages: [
       {
-        title: 'Экспертный уровень',
-        text: 'Аппараты с непревзойденной детализацией сигналов и снимков.',
-        image: 'https://images.unsplash.com/photo-1530497610245-94d3c16cda28?auto=format&fit=crop&w=600&q=80'
+        title: 'Контроль качества и сборка',
+        text: 'Собственный современный распределительный комплекс с выделенной зоной контроля и комплектации заказов.',
+        image: daantec3
       },
       {
-        title: 'Эргономика и ПО',
-        text: 'Интуитивные интерфейсы, ускоряющие проведение диагностических процедур.',
-        image: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=600&q=80'
+        title: 'Сплоченная команда экспертов',
+        text: 'Квалифицированные специалисты, регулярное обучение и культура непрерывного развития.',
+        image: daantec2
       },
       {
-        title: 'Обучение врачей',
-        text: 'Курсы повышения квалификации для операторов и врачей-диагностов.',
-        image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=600&q=80'
+        title: 'Философия «Caring for life»',
+        text: 'Приверженность высоким международным стандартам, надежность поставок и забота о здоровье каждого пациента.',
+        image: daantec1
       }
     ]
   },
@@ -712,7 +878,56 @@ const projectsList = ref([
         image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=600&q=80'
       }
     ]
-  }
+  },
+    {
+    id: 'neotron',
+    title: 'Neotron',
+    subtitle: 'Высокотехнологичные сосудистые стент-системы Boston Scientific и решения для эндоваскулярной хирургии',
+    category: 'Эндоваскулярная хирургия',
+    metaBadge: 'Boston Scientific • Promus ELITE • Wallstent-Uni™',
+    image: neotronImg,
+    description: 'Neotron — специализированное высокотехнологичное направление компании, осуществляющее поставку передовых решений для эндоваскулярной хирургии и интервенционной кардиологии. Мы являемся официальным партнером и дистрибьютором мирового лидера Boston Scientific, поставляя сертифицированные коронарные и периферические стент-системы, инновационные саморасширяющиеся стенты и катетеры высокой проходимости в ведущие кардиохирургические центры.',
+    tags: ['Boston Scientific', 'Promus ELITE', 'Wallstent-Uni™', 'Эндоваскулярная хирургия', 'Интервенционная кардиология'],
+    sections: [
+      {
+        title: 'Наша стратегическая цель',
+        text: 'Обеспечить кардиохирургические клиники и ангиографические лаборатории инновационными имплантируемыми системами мирового уровня от Boston Scientific, повышая безопасность вмешательств и сокращая время восстановления пациентов.'
+      },
+      {
+        title: 'Высокотехнологичный продуктовый портфель',
+        text: 'Флагманские решения для малоинвазивной хирургии с доказанной клинической эффективностью.',
+        items: [
+          'Платино-хромовые коронарные стенты Promus ELITE с лекарственным покрытием Эверолимус (ПВДФ-ГФП)',
+          'Саморасширяющиеся сосудистые стенты Wallstent-Uni™ из сверхпрочного сплава Elgiloy',
+          'Инновационные системы доставки UNISTEP Plus с возможностью точного репозиционирования',
+          'Комплексные наборы для ангиопластики, проводники и микрокатетеры'
+        ]
+      }
+    ],
+    metrics: [
+      { value: '8+ Млн', label: 'Имплантаций в мире' },
+      { value: '100%', label: 'Клиническая безопасность' },
+      { value: 'Elgiloy', label: 'Сверхпрочный сплав' },
+      { value: 'Boston Scientific', label: 'Мировой лидер' }
+    ],
+    advantages: [
+      {
+        title: 'Коронарный стент Promus ELITE',
+        text: 'Платино-хромовая платформа с лекарственным покрытием Эверолимус (ПВДФ-ГФП) и доказанной безопасностью (более 8 млн операций в мире).',
+        image: neotronPromus
+      },
+      {
+        title: 'Универсальный стент Wallstent-Uni™',
+        text: 'Высокая компрессионная прочность из сплава Elgiloy, превосходная рентгеноконтрастность и оптимальная поддержка сосудистой стенки.',
+        image: neotronWallstent1
+      },
+      {
+        title: 'Система доставки UNISTEP Plus',
+        text: 'Высокая точность позиционирования, возможность контролируемой репозиции и широкий размерный ряд для любых анатомических задач.',
+        image: neotronWallstent2
+      }
+    ]
+  },
 ])
 
 // Read tab from query or hash, fallback to first project
@@ -739,6 +954,7 @@ const activeProject = computed(() => {
 })
 
 onMounted(() => {
+  window.addEventListener('keydown', handleKeydown)
   if (route.query.tab && projectsList.value.some(p => p.id === route.query.tab)) {
     activeTab.value = String(route.query.tab)
   }
@@ -746,6 +962,11 @@ onMounted(() => {
   setTimeout(() => {
     AOS.refreshHard()
   }, 100)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('keydown', handleKeydown)
+  document.body.style.overflow = ''
 })
 </script>
 
