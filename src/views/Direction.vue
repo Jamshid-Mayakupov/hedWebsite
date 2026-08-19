@@ -135,10 +135,18 @@
                     v-if="activeProject.youtubeVideoId"
                     class="px-3.5 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-semibold tracking-wider flex items-center space-x-1.5 border border-white/30 shadow-md"
                   >
-                    <svg class="w-3.5 h-3.5 fill-current text-red-500" viewBox="0 0 24 24">
-                      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                    </svg>
-                    <span>YouTube</span>
+                    <template v-if="isVimeoVideo(activeProject.youtubeVideoId)">
+                      <svg class="w-3.5 h-3.5 fill-current text-sky-400" viewBox="0 0 24 24">
+                        <path d="M22.84 6.74c-.11 2.37-1.74 5.61-4.89 9.72-3.26 4.29-6.02 6.43-8.29 6.43-1.4 0-2.58-1.3-3.55-3.89l-1.92-7.05C3.51 9.4 2.82 8.13 2.13 8.13c-.15 0-.68.32-1.58.96L0 8.35c1-.88 1.99-1.76 2.97-2.64 1.34-1.17 2.36-1.78 3.06-1.84 1.63-.16 2.64.96 3.03 3.34.42 2.55.71 4.14.88 4.77.5 2.14 1.05 3.21 1.65 3.21.46 0 1.13-.74 2.01-2.22.88-1.48 1.35-2.61 1.41-3.39.11-1.33-.38-2-1.47-2-.52 0-1.05.12-1.59.36 1.07-3.51 3.12-5.21 6.15-5.1 2.25.07 3.31 1.54 3.18 4.41z"/>
+                      </svg>
+                      <span>Vimeo</span>
+                    </template>
+                    <template v-else>
+                      <svg class="w-3.5 h-3.5 fill-current text-red-500" viewBox="0 0 24 24">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                      </svg>
+                      <span>YouTube</span>
+                    </template>
                   </div>
                   <span
                     v-else
@@ -342,10 +350,18 @@
                       <h4 class="text-xs sm:text-sm font-bold font-raleway line-clamp-1">{{ vid.title }}</h4>
                     </div>
                     <div class="shrink-0 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[11px] font-semibold tracking-wider flex items-center space-x-1 border border-white/30">
-                      <svg class="w-3 h-3 fill-current text-red-500" viewBox="0 0 24 24">
-                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                      </svg>
-                      <span>YouTube</span>
+                      <template v-if="isVimeoVideo(vid.id)">
+                        <svg class="w-3 h-3 fill-current text-sky-400" viewBox="0 0 24 24">
+                          <path d="M22.84 6.74c-.11 2.37-1.74 5.61-4.89 9.72-3.26 4.29-6.02 6.43-8.29 6.43-1.4 0-2.58-1.3-3.55-3.89l-1.92-7.05C3.51 9.4 2.82 8.13 2.13 8.13c-.15 0-.68.32-1.58.96L0 8.35c1-.88 1.99-1.76 2.97-2.64 1.34-1.17 2.36-1.78 3.06-1.84 1.63-.16 2.64.96 3.03 3.34.42 2.55.71 4.14.88 4.77.5 2.14 1.05 3.21 1.65 3.21.46 0 1.13-.74 2.01-2.22.88-1.48 1.35-2.61 1.41-3.39.11-1.33-.38-2-1.47-2-.52 0-1.05.12-1.59.36 1.07-3.51 3.12-5.21 6.15-5.1 2.25.07 3.31 1.54 3.18 4.41z"/>
+                        </svg>
+                        <span>Vimeo</span>
+                      </template>
+                      <template v-else>
+                        <svg class="w-3 h-3 fill-current text-red-500" viewBox="0 0 24 24">
+                          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                        <span>YouTube</span>
+                      </template>
                     </div>
                   </div>
                 </div>
@@ -389,11 +405,11 @@
             <!-- Video Player (16:9 Aspect Ratio) -->
             <div class="relative w-full aspect-video">
               <iframe
-                :src="`https://www.youtube-nocookie.com/embed/${currentVideoId}?autoplay=1&rel=0`"
-                title="YouTube video player"
+                :src="activeEmbedUrl"
+                title="Video player"
                 class="w-full h-full"
                 frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allow="autoplay; fullscreen; picture-in-picture; encrypted-media; web-share"
                 allowfullscreen
               ></iframe>
             </div>
@@ -411,6 +427,10 @@ import { useRoute, useRouter } from 'vue-router'
 import AOS from 'aos'
 import schoolStemLab from '@/assets/images/school-stem-lab.jpg'
 import inspiringSchoolImg from '@/assets/images/directions/inspiring-school.png'
+import inspiringVideo1 from '@/assets/images/directions/inspiring-video-1.jpg'
+import inspiringVideo2 from '@/assets/images/directions/inspiring-video-2.jpg'
+import inspiringVideo3 from '@/assets/images/directions/inspiring-video-3.jpg'
+import inspiringVideo4 from '@/assets/images/directions/inspiring-video-4.jpg'
 import daantecPed1 from '@/assets/images/directions/daantec-ped-1.JPG'
 import daantecPed2 from '@/assets/images/directions/daantec-ped-2.jpg'
 import daantecPed3 from '@/assets/images/directions/daantec-ped-3.JPG'
@@ -434,6 +454,24 @@ const router = useRouter()
 // Video Modal State
 const isVideoModalOpen = ref(false)
 const currentVideoId = ref('')
+
+const isVimeoVideo = (videoId) => {
+  if (!videoId) return false
+  const str = String(videoId).trim()
+  return str.includes('vimeo.com') || /^\d+$/.test(str)
+}
+
+const activeEmbedUrl = computed(() => {
+  if (!currentVideoId.value) return ''
+  const vid = String(currentVideoId.value).trim()
+  if (vid.includes('vimeo.com')) {
+    return vid.includes('autoplay') ? vid : `${vid}?autoplay=1`
+  }
+  if (/^\d+$/.test(vid)) {
+    return `https://player.vimeo.com/video/${vid}?autoplay=1&title=0&byline=0&portrait=0&badge=0`
+  }
+  return `https://www.youtube-nocookie.com/embed/${vid}?autoplay=1&rel=0`
+})
 
 const openVideoModal = (videoId) => {
   currentVideoId.value = videoId
@@ -607,9 +645,31 @@ const projectsList = ref([
     subtitle: 'Современная международная школа нового поколения и углубленное развитие лидеров',
     category: 'Международное образование',
     metaBadge: 'Кембриджская программа • Олимпиады',
-    image: inspiringSchoolImg,
+    image: inspiringVideo1,
     youtubeVideoId: 'afkahtlfZpE',
-    videoPoster: inspiringSchoolImg,
+    videoPoster: inspiringVideo1,
+    videos: [
+      {
+        id: 'afkahtlfZpE',
+        title: 'Официальный видеообзор школы Inspiring Education School',
+        poster: inspiringVideo1
+      },
+      {
+        id: 'OkN1fGN9j-4',
+        title: 'Видеопрезентация образовательного процесса и школьной среды',
+        poster: inspiringVideo2
+      },
+      {
+        id: 'L-ryHJWwCjc',
+        title: 'Школьная жизнь и атмосфера Inspiring Education School',
+        poster: inspiringVideo3
+      },
+      {
+        id: '1219477540',
+        title: 'Inspiring School: образовательные программы и достижения учеников',
+        poster: inspiringVideo4
+      }
+    ],
     description: 'Inspiring Education School — современная международная школа, ориентированная на подготовку нового поколения успешных и конкурентоспособных лидеров. Образовательный процесс сочетает высокие академические стандарты, современные методики обучения и всестороннее развитие личности. Особое внимание уделяется углубленному изучению иностранных языков, включая китайский язык с преподаванием носителями языка. Ученики школы регулярно становятся победителями и призерами национальных и международных олимпиад, демонстрируя высокий уровень знаний и подготовки. Наша миссия — создать образовательную среду, в которой каждый ребенок раскрывает свой потенциал, развивает критическое мышление, лидерские качества и уверенно готовится к обучению и успешной карьере в глобальном мире.',
     tags: ['Международная школа', 'Китайский с носителями', 'STEM Образование', 'Олимпиадная подготовка', 'Критическое мышление'],
     sections: [
@@ -637,7 +697,7 @@ const projectsList = ref([
       {
         title: 'Языковая среда',
         text: 'Погружение в иностранные языки с первых классов под руководством экспатов.',
-        image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=600&q=80'
+        image: inspiringSchoolImg
       },
       {
         title: 'STEM-лаборатории',
@@ -647,7 +707,7 @@ const projectsList = ref([
       {
         title: 'Победы в олимпиадах',
         text: 'Системный менторинг для участия в престижных мировых состязаниях.',
-        image: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=600&q=80'
+        image: inspiringVideo4
       }
     ]
   },
