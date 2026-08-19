@@ -109,6 +109,9 @@ import { buildFileUrl } from '@/utils/media'
 
 import news1_1 from '@/assets/images/news/news-1.1.jpg'
 import sumalakImg from '@/assets/images/sumalak-party.jpg'
+import about2 from '@/assets/images/about-2.JPG'
+import springTour1 from '@/assets/images/news/spring-tournament-1.jpg'
+import runningCompImg from '@/assets/images/news/running-competition.jpg'
 
 const router = useRouter()
 
@@ -135,6 +138,33 @@ const newsItems = ref([
     date: "Август 2026",
     category: "Общество",
     slug: "v-dom-kuda-prishla-voda-prihodit-radost"
+  },
+  {
+    id: 6,
+    title: "Корпоративный тимбилдинг и объединение команды HED",
+    description: "Масштабный тимбилдинг компании «Hurshida Enter Delux», объединивший руководство, проектные офисы и специалистов ключевых подразделений.",
+    image: about2,
+    date: "Май 2026",
+    category: "События",
+    slug: "korporativnyj-timbilding-komandy-hed-maj-2026"
+  },
+  {
+    id: 7,
+    title: "Весенний детский спортивный праздник HED: перетягивание каната и прыжки со скакалкой",
+    description: "Яркий весенний спортивный праздник для детей сотрудников с перетягиванием каната и прыжками со скакалкой.",
+    image: springTour1,
+    date: "Апрель 2026",
+    category: "События",
+    slug: "vesennij-sportivnyj-turnir-i-iniciativy-hed-aprel-2026"
+  },
+  {
+    id: 8,
+    title: "Корпоративный забег и марафон HED Running Competition 2026",
+    description: "Легкоатлетический забег «HED Running Competition» для преодоления дистанций и популяризации активного бега.",
+    image: runningCompImg,
+    date: "Февраль 2026",
+    category: "События",
+    slug: "korporativnyj-zabeg-hed-running-competition-fevral-2026"
   },
   {
     id: 2,

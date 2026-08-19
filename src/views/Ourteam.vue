@@ -111,6 +111,12 @@ import img10 from '@/assets/images/ourteamimages/IMG_10.JPG'
 import img11 from '@/assets/images/ourteamimages/IMG_11.JPG'
 import img12 from '@/assets/images/ourteamimages/IMG_12.JPG'
 import img13 from '@/assets/images/ourteamimages/IMG_13.JPG'
+import img14 from '@/assets/images/ourteamimages/IMG_14.JPG'
+import img15 from '@/assets/images/ourteamimages/IMG_15.JPG'
+import img16 from '@/assets/images/ourteamimages/IMG_16.JPG'
+import img17 from '@/assets/images/ourteamimages/IMG_17.JPG'
+import img18 from '@/assets/images/ourteamimages/IMG_18.JPG'
+import img19 from '@/assets/images/ourteamimages/IMG_19.JPG'
 
 const activeCategory = ref('all')
 
@@ -138,6 +144,35 @@ const teamMembers = [
     image: img2
   },
   {
+    name: 'Абдурахманов Хасан',
+    position: 'Заместитель директора',
+    roleBadge: 'Руководство',
+    category: 'exec',
+    image: img15
+  },
+  {
+    name: 'Абдумуталипов Темур',
+    position: 'Директор Inspiring Education School',
+    subPosition: 'Помощник председателя',
+    roleBadge: 'Образование & Руководство',
+    category: 'exec',
+    image: img18
+  },
+  {
+    name: 'Шахло Примова',
+    position: 'Руководитель административного отдела',
+    roleBadge: 'Администрация',
+    category: 'exec',
+    image: img5
+  },
+  {
+    name: 'Икрамов Бахриддин',
+    position: 'Юрисконсульт',
+    roleBadge: 'Юриспруденция',
+    category: 'exec',
+    image: img17
+  },
+  {
     name: 'Одил Набиев',
     position: 'Финансовый аналитик',
     roleBadge: 'Аналитика',
@@ -152,11 +187,11 @@ const teamMembers = [
     image: img4
   },
   {
-    name: 'Шахло Примова',
-    position: 'Руководитель административного отдела',
-    roleBadge: 'Администрация',
-    category: 'exec',
-    image: img5
+    name: 'Полина Коршунова',
+    position: 'Главный бухгалтер',
+    roleBadge: 'Бухгалтерия',
+    category: 'finance',
+    image: img8
   },
   {
     name: 'Нодир Ахунджанов',
@@ -173,18 +208,18 @@ const teamMembers = [
     image: img7
   },
   {
-    name: 'Полина Коршунова',
-    position: 'Главный бухгалтер',
-    roleBadge: 'Бухгалтерия',
-    category: 'finance',
-    image: img8
-  },
-  {
     name: 'Алишер Мадаминов',
     position: 'Руководитель проекта HED Marketing',
     roleBadge: 'Маркетинг & Проекты',
     category: 'projects',
     image: img9
+  },
+  {
+    name: 'Саидов Акмал',
+    position: 'Руководитель проекта Daantec Pediatrics',
+    roleBadge: 'Управление проектами',
+    category: 'projects',
+    image: img19
   },
   {
     name: 'Жамшид Барнаев',
@@ -199,6 +234,20 @@ const teamMembers = [
     roleBadge: 'Управление проектами',
     category: 'projects',
     image: img11
+  },
+  {
+    name: 'Холматова Маъмура',
+    position: 'Координатор проектов',
+    roleBadge: 'Координация',
+    category: 'projects',
+    image: img14
+  },
+  {
+    name: 'Собиров Жасур',
+    position: 'Руководитель проекта HED Logistics',
+    roleBadge: 'Логистика & Управление',
+    category: 'logistics',
+    image: img16
   },
   {
     name: 'Азизжон Раимджонов',

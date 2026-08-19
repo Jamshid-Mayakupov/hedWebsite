@@ -49,9 +49,76 @@
           </div>
         </div>
 
-        <!-- Video Presentation Showcase Card (If story has youtubeVideoId) -->
+        <!-- Video Presentation Showcase (Multiple or Single Videos) -->
+        <!-- Case A: Multiple Videos Grid -->
         <div 
-          v-if="story.youtubeVideoId" 
+          v-if="story.videos && story.videos.length > 1"
+          class="space-y-4"
+          data-aos="fade-up"
+          data-aos-duration="800"
+        >
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg sm:text-xl font-bold text-gray-900 font-raleway flex items-center gap-2">
+              <svg class="w-5 h-5 text-red-500 fill-current" viewBox="0 0 24 24">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+              <span>Видеоматериалы репортажа ({{ story.videos.length }})</span>
+            </h3>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div
+              v-for="(vid, vIdx) in story.videos"
+              :key="vIdx"
+              class="relative rounded-3xl overflow-hidden shadow-lg border border-gray-200 group cursor-pointer bg-gray-900"
+              @click="openVideoModal(vid.id)"
+            >
+              <div class="relative h-64 sm:h-72 w-full overflow-hidden">
+                <img
+                  :src="vid.poster || story.image"
+                  :alt="vid.title"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90"
+                />
+                <div class="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors"></div>
+
+                <!-- Center Play Button -->
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="w-16 h-16 rounded-full bg-white/90 backdrop-blur-md text-gray-900 shadow-2xl flex items-center justify-center group-hover:scale-110 group-hover:bg-white transition-all duration-300 border border-white/80">
+                    <svg class="w-7 h-7 ml-0.5 text-Blue" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- Bottom Video Info Bar -->
+                <div class="absolute bottom-0 inset-x-0 p-5 bg-gradient-to-t from-black/80 via-black/50 to-transparent flex items-center justify-between text-white">
+                  <div class="pr-2">
+                    <span class="text-[10px] uppercase tracking-wider text-gray-300 font-semibold">Видео {{ vIdx + 1 }}</span>
+                    <h4 class="text-xs sm:text-sm font-bold font-raleway line-clamp-1">{{ vid.title }}</h4>
+                  </div>
+                  <div class="shrink-0 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[11px] font-semibold tracking-wider flex items-center space-x-1 border border-white/30">
+                    <template v-if="isVimeoVideo(vid.id)">
+                      <svg class="w-3 h-3 fill-current text-sky-400" viewBox="0 0 24 24">
+                        <path d="M22.84 6.74c-.11 2.37-1.74 5.61-4.89 9.72-3.26 4.29-6.02 6.43-8.29 6.43-1.4 0-2.58-1.3-3.55-3.89l-1.92-7.05C3.51 9.4 2.82 8.13 2.13 8.13c-.15 0-.68.32-1.58.96L0 8.35c1-.88 1.99-1.76 2.97-2.64 1.34-1.17 2.36-1.78 3.06-1.84 1.63-.16 2.64.96 3.03 3.34.42 2.55.71 4.14.88 4.77.5 2.14 1.05 3.21 1.65 3.21.46 0 1.13-.74 2.01-2.22.88-1.48 1.35-2.61 1.41-3.39.11-1.33-.38-2-1.47-2-.52 0-1.05.12-1.59.36 1.07-3.51 3.12-5.21 6.15-5.1 2.25.07 3.31 1.54 3.18 4.41z"/>
+                      </svg>
+                      <span>Vimeo</span>
+                    </template>
+                    <template v-else>
+                      <svg class="w-3 h-3 fill-current text-red-500" viewBox="0 0 24 24">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                      </svg>
+                      <span>YouTube</span>
+                    </template>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Case B: Single Video Showcase Card -->
+        <div 
+          v-else-if="story.youtubeVideoId" 
           class="relative rounded-3xl overflow-hidden shadow-lg border border-gray-200 group cursor-pointer"
           data-aos="fade-up"
           data-aos-duration="800"
@@ -81,10 +148,18 @@
                 <h3 class="text-sm sm:text-base font-bold font-raleway">Смотреть репортаж с открытия</h3>
               </div>
               <div class="px-3.5 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-semibold tracking-wider flex items-center space-x-1.5 border border-white/30">
-                <svg class="w-3.5 h-3.5 fill-current text-red-500" viewBox="0 0 24 24">
-                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                </svg>
-                <span>YouTube</span>
+                <template v-if="isVimeoVideo(story.youtubeVideoId)">
+                  <svg class="w-3.5 h-3.5 fill-current text-sky-400" viewBox="0 0 24 24">
+                    <path d="M22.84 6.74c-.11 2.37-1.74 5.61-4.89 9.72-3.26 4.29-6.02 6.43-8.29 6.43-1.4 0-2.58-1.3-3.55-3.89l-1.92-7.05C3.51 9.4 2.82 8.13 2.13 8.13c-.15 0-.68.32-1.58.96L0 8.35c1-.88 1.99-1.76 2.97-2.64 1.34-1.17 2.36-1.78 3.06-1.84 1.63-.16 2.64.96 3.03 3.34.42 2.55.71 4.14.88 4.77.5 2.14 1.05 3.21 1.65 3.21.46 0 1.13-.74 2.01-2.22.88-1.48 1.35-2.61 1.41-3.39.11-1.33-.38-2-1.47-2-.52 0-1.05.12-1.59.36 1.07-3.51 3.12-5.21 6.15-5.1 2.25.07 3.31 1.54 3.18 4.41z"/>
+                  </svg>
+                  <span>Vimeo</span>
+                </template>
+                <template v-else>
+                  <svg class="w-3.5 h-3.5 fill-current text-red-500" viewBox="0 0 24 24">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                  </svg>
+                  <span>YouTube</span>
+                </template>
               </div>
             </div>
           </div>
@@ -246,9 +321,9 @@
             <!-- Video Player (16:9 Aspect Ratio) -->
             <div class="relative w-full aspect-video bg-black">
               <iframe
-                :src="activeYoutubeEmbedUrl"
+                :src="activeEmbedUrl"
                 class="absolute inset-0 w-full h-full border-0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allow="autoplay; fullscreen; picture-in-picture; encrypted-media; web-share"
                 allowfullscreen
                 title="Видеорепортаж HURSHIDA ENTER DELUX"
               ></iframe>
@@ -308,6 +383,11 @@ import news1_5 from '@/assets/images/news/news-1.5.jpg'
 import news1_6 from '@/assets/images/news/news-1.6.jpg'
 import news1_7 from '@/assets/images/news/news-1.7.jpg'
 import sumalakImg from '@/assets/images/sumalak-party.jpg'
+import about1 from '@/assets/images/about-1.JPG'
+import about2 from '@/assets/images/about-2.JPG'
+import springTour1 from '@/assets/images/news/spring-tournament-1.jpg'
+import springTour2 from '@/assets/images/news/spring-tournament-2.jpg'
+import runningCompImg from '@/assets/images/news/running-competition.jpg'
 
 const route = useRoute()
 const router = useRouter()
@@ -316,9 +396,22 @@ const story = ref(null)
 const isVideoModalOpen = ref(false)
 const activeVideoId = ref('')
 
-const activeYoutubeEmbedUrl = computed(() => {
+const isVimeoVideo = (videoId) => {
+  if (!videoId) return false
+  const str = String(videoId).trim()
+  return str.includes('vimeo.com') || /^\d+$/.test(str)
+}
+
+const activeEmbedUrl = computed(() => {
   if (!activeVideoId.value) return ''
-  return `https://www.youtube.com/embed/${activeVideoId.value}?autoplay=1&rel=0`
+  const vid = String(activeVideoId.value).trim()
+  if (vid.includes('vimeo.com')) {
+    return vid.includes('autoplay') ? vid : `${vid}?autoplay=1`
+  }
+  if (/^\d+$/.test(vid)) {
+    return `https://player.vimeo.com/video/${vid}?autoplay=1&title=0&byline=0&portrait=0&badge=0`
+  }
+  return `https://www.youtube.com/embed/${vid}?autoplay=1&rel=0`
 })
 
 const openVideoModal = (videoId) => {
@@ -347,6 +440,18 @@ const allNewsData = [
     image: news1_1,
     videoPoster: news1_2,
     youtubeVideoId: "5Pm5hfCPpK8",
+    videos: [
+      {
+        id: "5Pm5hfCPpK8",
+        title: "Официальный видеорепортаж: открытие гидротехнического сооружения",
+        poster: news1_2
+      },
+      {
+        id: "nzk2IhABreQ",
+        title: "Видеоматериал: чистая питьевая вода для жителей Пайарыка",
+        poster: news1_1
+      }
+    ],
     date: "Август 2026",
     slug: "v-dom-kuda-prishla-voda-prihodit-radost",
     category: "Общество",
@@ -396,6 +501,112 @@ const allNewsData = [
       <div class="text-right text-sm text-gray-500 font-medium pt-4">
         Автор: Хусниддин ХОЛДОРОВ
       </div>
+    </div>`
+  },
+  {
+    id: 6,
+    title: "Корпоративный тимбилдинг и объединение команды HED",
+    description: "В мае 2026 года состоялся масштабный корпоративный тимбилдинг компании «Hurshida Enter Delux», объединивший руководство, проектные офисы и специалистов всех ключевых подразделений для укрепления командного духа и синергии.",
+    image: about2,
+    videoPoster: about1,
+    youtubeVideoId: "1219452814",
+    date: "Май 2026",
+    slug: "korporativnyj-timbilding-komandy-hed-maj-2026",
+    category: "События",
+    gallery: [about2, about1],
+    content: `<div class="space-y-6 text-gray-800 leading-relaxed text-base sm:text-lg">
+      <p>
+        В мае 2026 года компания <strong>«Hurshida Enter Delux»</strong> провела масштабный корпоративный тимбилдинг, в котором приняли участие руководство, руководители направлений (Daantec, Daantec Pediatrics, Alba Dent, Neotron, Аортика, HED Logistics, HED Marketing, Inspiring Education School) и сотрудники всех ключевых подразделений.
+      </p>
+
+      <p>
+        Мероприятие было направлено на укрепление командного взаимодействия, обмен опытом между проектными офисами, развитие синергии внутри холдинга и совместную выработку стратегических ориентиров на второе полугодие.
+      </p>
+
+      <p>
+        Программа тимбилдинга объединила тренинги по эффективной кросс-функциональной коммуникации, командные интерактивы на открытом воздухе, спортивные состязания, а также открытые стратегические сессии, где каждый участник смог предложить инициативы по оптимизации рабочих процессов и развитию новых сервисов.
+      </p>
+
+      <blockquote class="my-8 pl-6 sm:pl-8 border-l-4 border-Blue py-2 space-y-3 bg-blue-50/50 rounded-r-2xl">
+        <p class="text-base sm:text-lg text-gray-800 italic leading-relaxed">
+          «Сила нашей компании — это сплоченная команда экспертов и единомышленников. Тимбилдинг показал, что вместе мы способны решать задачи любой сложности, развивать передовые медицинские и образовательные направления и уверенно достигать поставленных целей.»
+        </p>
+        <cite class="block text-sm font-bold text-Blue not-italic">
+          — Руководство компании «HURSHIDA ENTER DELUX»
+        </cite>
+      </blockquote>
+
+      <p>
+        Завершилось мероприятие праздничным ужином, награждением активных участников и неформальным общением, которое еще сильнее сплотило коллектив и зарядило каждого сотрудника энергией и мотивацией для новых достижений.
+      </p>
+    </div>`
+  },
+  {
+    id: 7,
+    title: "Весенний детский спортивный праздник HED: перетягивание каната и прыжки со скакалкой",
+    description: "В апреле 2026 года компания «Hurshida Enter Delux» организовала яркий весенний спортивный праздник для детей сотрудников с увлекательными состязаниями по перетягиванию каната, прыжкам со скакалкой и призами.",
+    image: springTour1,
+    videoPoster: springTour2,
+    gallery: [springTour1, springTour2],
+    youtubeVideoId: "AYw2bis1B6A",
+    date: "Апрель 2026",
+    slug: "vesennij-sportivnyj-turnir-i-iniciativy-hed-aprel-2026",
+    category: "События",
+    content: `<div class="space-y-6 text-gray-800 leading-relaxed text-base sm:text-lg">
+      <p>
+        В апреле 2026 года компания <strong>«Hurshida Enter Delux»</strong> провела яркий и радостный весенний спортивный праздник для детей сотрудников и их семей на открытом воздухе.
+      </p>
+      <p>
+        Главными событиями дня стали захватывающие командные и индивидуальные состязания: юные участники с огромным азартом соревновались в перетягивании каната (Tug-of-war), синхронных и скоростных прыжках со скакалкой (Jump Rope / Skipping Rope Competition), а также в веселых подвижных эстафетах.
+      </p>
+      <p>
+        Праздник подарил детям море смеха, позитивных эмоций и искренней радости побед, а родителям — возможность провести незабываемый активный выходной вместе со своими семьями и коллегами.
+      </p>
+      <blockquote class="my-8 pl-6 sm:pl-8 border-l-4 border-Blue py-2 space-y-3 bg-blue-50/50 rounded-r-2xl">
+        <p class="text-base sm:text-lg text-gray-800 italic leading-relaxed">
+          «Забота о семьях наших сотрудников и счастливые улыбки детей — это то, что вдохновляет нас каждый день. Детский спортивный праздник стал прекрасной весенней традицией HED, объединяющей поколения вокруг спорта, дружбы и здорового образа жизни.»
+        </p>
+        <cite class="block text-sm font-bold text-Blue not-italic">
+          — Команда «HURSHIDA ENTER DELUX»
+        </cite>
+      </blockquote>
+      <p>
+        В завершение праздника все юные чемпионы получили памятные медали, призы и сладкие подарки, унеся с собой заряд бодрости и самые теплые весенние воспоминания.
+      </p>
+    </div>`
+  },
+  {
+    id: 8,
+    title: "Корпоративный забег и марафон HED Running Competition 2026",
+    description: "В феврале 2026 года состоялся масштабный легкоатлетический забег «HED Running Competition», объединивший сотрудников компании для преодоления дистанций, проверки выносливости и популяризации активного бега и здорового образа жизни.",
+    image: runningCompImg,
+    videoPoster: runningCompImg,
+    gallery: [runningCompImg],
+    youtubeVideoId: "1219452903",
+    date: "Февраль 2026",
+    slug: "korporativnyj-zabeg-hed-running-competition-fevral-2026",
+    category: "События",
+    content: `<div class="space-y-6 text-gray-800 leading-relaxed text-base sm:text-lg">
+      <p>
+        В феврале 2026 года фармацевтическая компания <strong>«Hurshida Enter Delux»</strong> провела масштабный зимний легкоатлетический забег <strong>HED Running Competition</strong>, приуроченный к популяризации спорта, беговой культуры и укреплению здоровья сотрудников.
+      </p>
+      <p>
+        В забеге приняли участие представители всех департаментов и подразделений компании — от руководящего состава до специалистов логистических комплексов и проектных офисов. Участники соревновались на различных дистанциях, демонстрируя силу воли, отличную физическую подготовку, целеустремленность и взаимную поддержку на трассе.
+      </p>
+      <p>
+        Атмосфера соревнований была наполнена спортивным азартом и энергией. Каждый километр маршрута требовал концентрации и выносливости, а активные группы поддержки подбадривали коллег на протяжении всей дистанции до самой финишной арки.
+      </p>
+      <blockquote class="my-8 pl-6 sm:pl-8 border-l-4 border-Blue py-2 space-y-3 bg-blue-50/50 rounded-r-2xl">
+        <p class="text-base sm:text-lg text-gray-800 italic leading-relaxed">
+          «Бег — это не только проверка личной выносливости, но и умение распределять силы, ставить амбициозные цели и непрерывно двигаться к ним шаг за шагом. HED Running Competition показал, что наш коллектив готов преодолевать любые дистанции вместе!»
+        </p>
+        <cite class="block text-sm font-bold text-Blue not-italic">
+          — Оргкомитет HED Running Competition
+        </cite>
+      </blockquote>
+      <p>
+        На финише всех участников ждали памятные медали финишеров, горячий чай и теплые поздравления. Победители в индивидуальных зачетах среди мужчин и женщин были награждены почетными кубками и ценными призами. Корпоративный забег стал ярким спортивным праздником единства, силы и здорового духа команды HED.
+      </p>
     </div>`
   },
   {
