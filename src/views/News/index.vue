@@ -287,8 +287,6 @@
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import AOS from 'aos'
-import api from '@/utils/axios'
-import { buildFileUrl } from '@/utils/media'
 
 // Import top story news images
 import news1_1 from '@/assets/images/news/news-1.1.jpg'
@@ -473,44 +471,8 @@ const handleSubscribe = () => {
   }, 5000)
 }
 
-function generateSlug(str) {
-  if (!str) return Math.random().toString(36).substring(2, 8)
-  return str
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, '-')
-    .replace(/[^\wа-яё-]+/gi, '')
-    .replace(/--+/g, '-')
-}
-
-const loadApiNews = async () => {
-  try {
-    const res = await api.get('/api/news/all')
-    const news = res.data.filter(item => item.type === 'SITE_NEWS')
-
-    if (news.length > 0) {
-      const mappedApiNews = news.map((item, index) => ({
-        id: item.id || index + 1,
-        title: item.title,
-        description: item.description || item.content || 'Подробнее читайте в полной версии...',
-        image: buildFileUrl(item.fileId) || 'https://images.unsplash.com/photo-1585435557343-3b092031a831?w=800&q=80',
-        date: item.dateTime ? new Date(item.dateTime).toLocaleDateString('ru-RU', { month: 'long', year: 'numeric' }) : 'Недавно',
-        category: item.category || 'События',
-        categoryKey: item.category === 'Компания' ? 'company' : item.category === 'Инновации' ? 'industry' : 'events',
-        slug: item.title ? generateSlug(`${item.title}-${index}`) : String(item.id),
-        hasVideo: false
-      }))
-      // Prepend our top featured story
-      newsItems.value = [newsItems.value[0], ...mappedApiNews]
-    }
-  } catch (err) {
-    console.warn('API news endpoint unavailable, showing curated news data:', err)
-  }
-}
-
 onMounted(() => {
   window.scrollTo({ top: 0, behavior: 'instant' })
-  loadApiNews()
   setTimeout(() => {
     AOS.refreshHard()
   }, 100)

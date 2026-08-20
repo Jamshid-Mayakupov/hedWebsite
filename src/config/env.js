@@ -13,22 +13,10 @@ export const env = Object.freeze({
   requestTimeoutMs: 12_000,
 })
 
-export const requiredEnvironmentVariables = Object.freeze([
-  'VITE_SITE_URL',
-  'VITE_API_BASE_URL',
-  'VITE_AUTH_API_BASE_URL',
-  'VITE_FILE_API_BASE_URL',
-])
+export const requiredEnvironmentVariables = Object.freeze([])
 
 export function getMissingEnvironmentVariables() {
-  const values = {
-    VITE_SITE_URL: env.siteUrl,
-    VITE_API_BASE_URL: env.apiBaseUrl,
-    VITE_AUTH_API_BASE_URL: env.authApiBaseUrl,
-    VITE_FILE_API_BASE_URL: env.fileApiBaseUrl,
-  }
-
-  return requiredEnvironmentVariables.filter((name) => !values[name])
+  return []
 }
 
 export function getSiteUrl() {
