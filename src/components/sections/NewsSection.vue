@@ -102,10 +102,8 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import api from '@/utils/axios'
-import { buildFileUrl } from '@/utils/media'
 
 import news1_1 from '@/assets/images/news/news-1.1.jpg'
 import sumalakImg from '@/assets/images/sumalak-party.jpg'
@@ -188,39 +186,6 @@ const newsItems = ref([
 
 const displayedNews = computed(() => newsItems.value.slice(0, 3))
 
-function generateSlug(str) {
-  if (!str) return Math.random().toString(36).substring(2, 8)
-  return str
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, '-')
-    .replace(/[^\wа-яё-]+/gi, '')
-    .replace(/--+/g, '-')
-}
-
-const getAllNews = async () => {
-  try {
-    const res = await api.get('/api/news/all')
-    const news = res.data.filter(item => item.type === 'SITE_NEWS')
-
-    if (news.length > 0) {
-      newsItems.value = news.map((item, index) => ({
-        ...item,
-        image: buildFileUrl(item.fileId),
-        date: item.dateTime ? new Date(item.dateTime).toLocaleDateString('ru-RU', { month: 'long', year: 'numeric' }) : 'Недавно',
-        category: item.category || 'События',
-        slug: item.title ? generateSlug(`${item.title}-${index}`) : item.id,
-        description: item.description || item.content || 'Подробнее читайте в полной версии...'
-      }))
-    }
-  } catch (err) {
-    console.error('Ошибка при загрузке новостей:', err)
-  }
-}
-
-onMounted(() => {
-  getAllNews()
-})
 </script>
 
 <style scoped>
