@@ -425,7 +425,6 @@
 import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import AOS from 'aos'
-import schoolStemLab from '@/assets/images/school-stem-lab.jpg'
 import inspiringSchoolImg from '@/assets/images/directions/inspiring-school.png'
 import inspiringVideo1 from '@/assets/images/directions/inspiring-video-1.jpg'
 import inspiringVideo2 from '@/assets/images/directions/inspiring-video-2.jpg'
@@ -702,12 +701,12 @@ const projectsList = ref([
       {
         title: 'STEM-лаборатории',
         text: 'Современные кабинеты робототехники, химии, физики и программирования.',
-        image: schoolStemLab
+        image: inspiringVideo2
       },
       {
         title: 'Победы в олимпиадах',
         text: 'Системный менторинг для участия в престижных мировых состязаниях.',
-        image: inspiringVideo4
+        image: inspiringVideo3
       }
     ]
   },
@@ -848,7 +847,19 @@ const projectsList = ref([
     metaBadge: 'Caring for life • Высокие стандарты',
     image: daantec4,
     videoPoster: daantec4,
-    youtubeVideoId: '0RURnR8ISys',
+    youtubeVideoId: '-pv92DgL6aE',
+    videos: [
+      {
+        id: '-pv92DgL6aE',
+        title: 'Обзор диагностического оборудования и решений Daantec',
+        poster: daantec4
+      },
+      {
+        id: 'YHzXk9E7aao',
+        title: 'Презентация и технологические стандарты бренда Daantec',
+        poster: daantec1
+      }
+    ],
     description: 'Daantec — авторитетный бренд, специализирующийся на поставках современного диагностического, электрофизиологического и терапевтического оборудования, помогающего медицинским учреждениям выявлять заболевания на ранних стадиях.',
     tags: ['Диагностика', 'Электрофизиология', 'Медоборудование', 'Инновации', 'Caring for life'],
     sections: [
