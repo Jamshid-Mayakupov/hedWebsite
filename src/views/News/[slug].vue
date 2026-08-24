@@ -386,7 +386,6 @@ import sumalakImg from '@/assets/images/sumalak-party.jpg'
 import about1 from '@/assets/images/about-1.JPG'
 import about2 from '@/assets/images/about-2.JPG'
 import springTour1 from '@/assets/images/news/spring-tournament-1.jpg'
-import springTour2 from '@/assets/images/news/spring-tournament-2.jpg'
 import runningCompImg from '@/assets/images/news/running-competition.jpg'
 
 const route = useRoute()
@@ -546,8 +545,8 @@ const allNewsData = [
     title: "Весенний детский спортивный праздник HED: перетягивание каната и прыжки со скакалкой",
     description: "В апреле 2026 года компания «Hurshida Enter Delux» организовала яркий весенний спортивный праздник для детей сотрудников с увлекательными состязаниями по перетягиванию каната, прыжкам со скакалкой и призами.",
     image: springTour1,
-    videoPoster: springTour2,
-    gallery: [springTour1, springTour2],
+    videoPoster: springTour1,
+    gallery: [springTour1],
     youtubeVideoId: "AYw2bis1B6A",
     date: "Апрель 2026",
     slug: "vesennij-sportivnyj-turnir-i-iniciativy-hed-aprel-2026",
@@ -615,6 +614,7 @@ const allNewsData = [
     description: "Компания 'Hurshida Enter Delux' организовала масштабное корпоративное мероприятие, посвященное традиционному весеннему празднику с участием ключевых партнеров отрасли.",
     image: sumalakImg,
     videoPoster: sumalakImg,
+    gallery: [sumalakImg],
     youtubeVideoId: "lFh9rSvFQ_E",
     date: "Март 2025",
     slug: "grandioznoe-prazdnovanie-sumalak-party-2025",
