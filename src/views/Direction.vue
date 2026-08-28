@@ -855,7 +855,7 @@ const projectsList = ref([
         poster: daantec4
       },
       {
-        id: 'YHzXk9E7aao',
+        id: '1222054812',
         title: 'Презентация и технологические стандарты бренда Daantec',
         poster: daantec1
       }
