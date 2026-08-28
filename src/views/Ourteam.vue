@@ -131,21 +131,21 @@ const categories = [
 const teamMembers = [
   {
     name: 'Примов С.Б',
-    position: 'Соучредитель и Председатель',
+    position: 'Соучредитель и Председатель HED GROUP',
     roleBadge: 'Руководство',
     category: 'exec',
     image: img1
   },
   {
     name: 'Хасанжон Собиржонов',
-    position: 'Директор',
+    position: 'Генеральный Директор HED Group',
     roleBadge: 'Руководство',
     category: 'exec',
     image: img2
   },
   {
     name: 'Абдурахманов Хасан',
-    position: 'Заместитель директора',
+    position: 'Заместитель директора, член Центрального управления, Руководитель проекта Alba Dent',
     roleBadge: 'Руководство',
     category: 'exec',
     image: img15
@@ -174,14 +174,14 @@ const teamMembers = [
   },
   {
     name: 'Одил Набиев',
-    position: 'Финансовый аналитик',
+    position: 'Руководитель отдела финансового планирования и аналитики HED GROUP',
     roleBadge: 'Аналитика',
     category: 'finance',
     image: img3
   },
   {
     name: 'Шодиер Уринов',
-    position: 'Финансист',
+    position: 'Руководитель финансовых операций HED GROUP',
     roleBadge: 'Финансы',
     category: 'finance',
     image: img4
