@@ -1,129 +1,107 @@
-<!-- src/components/sections/Intro.vue -->
 <template>
-  <section class="relative w-full h-screen overflow-hidden" aria-labelledby="header-section">
-    <!-- Video Background -->
-    <VideoLoad class="absolute inset-0 w-full h-full object-cover z-0" />
+  <section class="independence-hero relative w-full overflow-hidden" aria-labelledby="independence-title">
+    <!-- Temporarily disabled for the Independence Day greeting. -->
+    <!-- <VideoLoad class="absolute inset-0 z-0 h-full w-full object-cover" /> -->
 
-    <!-- Overlay -->
-    <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70 z-10"></div>
+    <img
+      :src="independenceMonument"
+      alt=""
+      class="hero-photo absolute inset-0 h-full w-full object-cover"
+      aria-hidden="true"
+    />
+    <div class="hero-shade absolute inset-0" aria-hidden="true"></div>
+    <div class="hero-grain absolute inset-0" aria-hidden="true"></div>
 
-    <!-- Hero Content -->
-    <div class="relative z-20 h-full flex items-center justify-center pt-24 pb-16">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-5xl mx-auto text-center text-white space-y-8">
-
-          <!-- Top Badge -->
+    <div class="relative z-10 mx-auto flex min-h-[inherit] w-full max-w-7xl items-center px-4 pb-20 pt-28 sm:px-6 sm:pt-32 lg:px-8">
+      <div class="grid w-full items-center gap-12 lg:grid-cols-[minmax(0,1.35fr)_minmax(280px,0.65fr)] lg:gap-16">
+        <div class="max-w-4xl text-white">
           <div
-            class="inline-flex items-center space-x-2 px-5 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs sm:text-base font-semibold tracking-wider shadow-md"
-            data-aos="fade-down"
-            data-aos-duration="800">
-            <span>HURSHIDA ENTER DELUX</span>
+            class="mb-7 flex items-center gap-4"
+            data-aos="fade-up"
+            data-aos-duration="700"
+          >
+            <span class="flag-line" aria-hidden="true"></span>
+            <p class="m-0 text-xs font-semibold uppercase tracking-[0.24em] text-white/80 sm:text-sm">
+              1 сентября · 1991—2026
+            </p>
           </div>
 
-          <!-- Main Title with Typing Effect -->
           <h1
-            class="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold leading-tight font-raleway text-white tracking-tight"
+            id="independence-title"
+            class="font-raleway text-[2.6rem] font-extrabold leading-[0.96] tracking-[-0.035em] text-white sm:text-7xl lg:text-[5.5rem] xl:text-[6.5rem]"
             data-aos="fade-up"
-            data-aos-duration="1000"
-            data-aos-delay="200">
-            <span class="block typing-text text-white">
-              {{ typedText }}<span class="cursor text-lightBlue">|</span>
-            </span>
+            data-aos-duration="850"
+            data-aos-delay="100"
+          >
+            <span class="block">35 лет</span>
+            <span class="mt-2 block text-cyan-200">независимости</span>
           </h1>
 
-          <!-- Subtitle -->
           <p
-            class="text-xl sm:text-3xl md:text-4xl text-lightBlue font-bold tracking-wide font-raleway uppercase"
+            class="mt-7 font-raleway text-2xl font-bold leading-tight text-white sm:text-3xl lg:text-4xl"
             data-aos="fade-up"
-            data-aos-duration="1000"
-            data-aos-delay="400">
-            В мире фармацевтики
+            data-aos-duration="850"
+            data-aos-delay="250"
+          >
+            С праздником, Узбекистан!
           </p>
 
-          <!-- Description -->
           <p
-            class="text-lg sm:text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto leading-relaxed font-normal"
+            class="mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg lg:text-xl"
             data-aos="fade-up"
-            data-aos-duration="1000"
-            data-aos-delay="600">
-            Надежный партнер с 15-летним опытом работы в сфере дистрибуции фармацевтических препаратов
+            data-aos-duration="850"
+            data-aos-delay="350"
+          >
+            Компания HED сердечно поздравляет соотечественников с 35-летием государственной
+            независимости. Желаем нашей стране мира и процветания, а каждой семье — благополучия,
+            здоровья и уверенности в будущем.
           </p>
 
-          <!-- CTA Buttons -->
-          <div
-            class="flex flex-col sm:flex-row gap-4 justify-center items-center pt-3"
+          <blockquote
+            class="mt-8 max-w-2xl border-l-2 border-amber-300/80 pl-5 text-sm font-medium italic leading-relaxed text-white/75 sm:text-base"
             data-aos="fade-up"
-            data-aos-duration="1000"
-            data-aos-delay="800">
-            <router-link
-              to="/contacts"
-              class="px-7 py-3.5 text-sm sm:text-base font-semibold text-white bg-Blue hover:bg-lightBlue rounded-full transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 flex items-center justify-center space-x-2">
-              <span>Связаться с нами</span>
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
-            </router-link>
-            <router-link
-              to="/about"
-              class="px-7 py-3.5 text-sm sm:text-base font-semibold text-white bg-white/10 backdrop-blur-md border border-white/30 hover:bg-white hover:text-gray-900 rounded-full transition-all duration-300 shadow-sm hover:scale-105 flex items-center justify-center space-x-2">
-              <span>О компании</span>
-            </router-link>
+            data-aos-duration="850"
+            data-aos-delay="450"
+          >
+            «Yagona Vatan, yagona xalq bo‘lib, yangi hayot va kelajak yaratamiz!»
+          </blockquote>
+        </div>
+
+        <div
+          class="anniversary-card mx-auto w-full max-w-[290px] rounded-3xl border border-white/35 bg-white/90 p-5 shadow-2xl backdrop-blur-xl sm:max-w-[330px] sm:p-7 lg:justify-self-end"
+          data-aos="fade-left"
+          data-aos-duration="900"
+          data-aos-delay="250"
+        >
+          <img
+            :src="independenceLogo"
+            alt="Официальная эмблема 35-летия независимости Узбекистана"
+            class="mx-auto h-auto w-full"
+          />
+          <div class="mt-4 border-t border-slate-200 pt-4 text-center">
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">HED поздравляет</p>
           </div>
-
         </div>
       </div>
     </div>
 
-    <!-- Scroll Indicator -->
-    <div
-      class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce pointer-events-none"
-      data-aos="fade-up"
-      data-aos-duration="1000"
-      data-aos-delay="1400">
-      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-      </svg>
+    <div class="absolute inset-x-0 bottom-0 z-10 grid grid-cols-[1fr_6px_1.6fr_6px_1fr]" aria-hidden="true">
+      <span class="h-1.5 bg-[#16a7dc]"></span>
+      <span class="h-1.5 bg-[#cf2634]"></span>
+      <span class="h-1.5 bg-white"></span>
+      <span class="h-1.5 bg-[#cf2634]"></span>
+      <span class="h-1.5 bg-[#18a558]"></span>
     </div>
   </section>
 </template>
 
 <script setup>
-import VideoLoad from '@/components/VideoLoad.vue'
-import { onBeforeUnmount, ref, onMounted } from 'vue'
+// Official 35th-anniversary assets: https://mustaqillik35.uz/ and https://ed1.customs.uz/
+import independenceLogo from '@/assets/images/independence-35-emblem.png'
+import independenceMonument from '@/assets/images/independence-monument.jpg'
 
-// Typing effect
-const fullText = 'На шаг впереди'
-const typedText = ref('')
-let typingIndex = 0
-let typingTimer
-let startTimer
-
-const startTyping = () => {
-  typedText.value = ''
-  typingIndex = 0
-  typeChar()
-}
-
-const typeChar = () => {
-  if (typingIndex < fullText.length) {
-    typedText.value += fullText[typingIndex]
-    typingIndex++
-    typingTimer = window.setTimeout(typeChar, 150)
-  }
-}
-
-onMounted(() => {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    typedText.value = fullText
-    return
-  }
-  startTimer = window.setTimeout(startTyping, 500)
-})
-
-onBeforeUnmount(() => {
-  window.clearTimeout(startTimer)
-  window.clearTimeout(typingTimer)
-})
+// Temporarily disabled for the Independence Day greeting.
+// import VideoLoad from '@/components/VideoLoad.vue'
 </script>
 
 <style scoped>
@@ -131,38 +109,59 @@ onBeforeUnmount(() => {
   font-family: 'Raleway', sans-serif;
 }
 
-.typing-text {
-  display: inline-block;
+.independence-hero {
+  min-height: max(100vh, 720px);
+  background: #06172a;
 }
 
-.cursor {
-  animation: blink 1s infinite;
-  color: #1C46F5;
+.hero-photo {
+  object-position: 50% 58%;
 }
 
-@keyframes blink {
-  0%, 49% {
-    opacity: 1;
+.hero-shade {
+  background:
+    linear-gradient(90deg, rgba(4, 17, 34, 0.96) 0%, rgba(4, 22, 42, 0.86) 43%, rgba(5, 30, 50, 0.42) 70%, rgba(3, 16, 30, 0.58) 100%),
+    linear-gradient(180deg, rgba(2, 11, 23, 0.52) 0%, transparent 32%, rgba(2, 12, 24, 0.64) 100%);
+}
+
+.hero-grain {
+  opacity: 0.08;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.flag-line {
+  width: 64px;
+  height: 3px;
+  background: linear-gradient(90deg, #16a7dc 0 30%, #ffffff 30% 65%, #18a558 65% 100%);
+  box-shadow: 0 1px 0 #cf2634;
+}
+
+.anniversary-card {
+  box-shadow: 0 28px 70px rgba(0, 8, 20, 0.38);
+}
+
+@media (max-width: 1023px) {
+  .independence-hero {
+    min-height: 100vh;
   }
-  50%, 100% {
-    opacity: 0;
+
+  .hero-photo {
+    object-position: 53% 50%;
+  }
+
+  .hero-shade {
+    background:
+      linear-gradient(180deg, rgba(3, 16, 31, 0.78) 0%, rgba(3, 19, 36, 0.86) 48%, rgba(2, 13, 27, 0.96) 100%),
+      linear-gradient(90deg, rgba(3, 17, 34, 0.54), rgba(3, 17, 34, 0.35));
   }
 }
 
-h1, p {
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
-}
-
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
+@media (prefers-reduced-motion: reduce) {
+  .independence-hero [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.animate-bounce {
-  animation: bounce 2s infinite;
 }
 </style>
