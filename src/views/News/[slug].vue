@@ -70,7 +70,10 @@
             <div
               v-for="(vid, vIdx) in story.videos"
               :key="vIdx"
-              class="relative rounded-3xl overflow-hidden shadow-lg border border-gray-200 group cursor-pointer bg-gray-900"
+              :class="[
+                'relative rounded-3xl overflow-hidden shadow-lg border border-gray-200 group cursor-pointer bg-gray-900',
+                story.videos.length === 3 && vIdx === 2 ? 'md:col-span-2' : ''
+              ]"
               @click="openVideoModal(vid.id)"
             >
               <div class="relative h-64 sm:h-72 w-full overflow-hidden">
@@ -382,6 +385,7 @@ import news1_4 from '@/assets/images/news/news-1.4.jpg'
 import news1_5 from '@/assets/images/news/news-1.5.jpg'
 import news1_6 from '@/assets/images/news/news-1.6.jpg'
 import news1_7 from '@/assets/images/news/news-1.7.jpg'
+import news1_8 from '@/assets/images/news/news-1.8.jpg'
 import sumalakImg from '@/assets/images/sumalak-party.jpg'
 import about1 from '@/assets/images/about-1.JPG'
 import about2 from '@/assets/images/about-2.JPG'
@@ -449,12 +453,17 @@ const allNewsData = [
         id: "nzk2IhABreQ",
         title: "Видеоматериал: чистая питьевая вода для жителей Пайарыка",
         poster: news1_1
+      },
+      {
+        id: "Kiyh2T_NGpY",
+        title: "Церемония запуска и открытие водохранилища в Пайарыке",
+        poster: news1_8
       }
     ],
     date: "Август 2026",
     slug: "v-dom-kuda-prishla-voda-prihodit-radost",
     category: "Общество",
-    gallery: [news1_1, news1_2, news1_3, news1_4, news1_5, news1_6, news1_7],
+    gallery: [news1_1, news1_2, news1_3, news1_4, news1_5, news1_6, news1_7, news1_8],
     content: `<div class="space-y-6 text-gray-800 leading-relaxed text-base sm:text-lg">
       <p>
         В Пайарыкском районе по инициативе и при спонсорской поддержке Бахтиёра Примова — младшего сына мастера-хлопкороба Ахада Примова, а также его сыновей Элёра и Сардора, основателей компании «Hurshida Enter Delux», более 2300 жителей обеспечены качественной чистой питьевой водой.
